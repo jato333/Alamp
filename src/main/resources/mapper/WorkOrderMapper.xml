@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dc.erp.dao.WorkOrderDao">
+	<resultMap id="BaseResultMap" type="com.dc.erp.entity.WorkOrder">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="companyName" jdbcType="VARCHAR" property="companyName" />
+		<result column="clientID" jdbcType="VARCHAR" property="clientID" />
+		<result column="logisticProviderID" jdbcType="VARCHAR"
+			property="logisticProviderID" />
+		<result column="customerId" jdbcType="VARCHAR" property="customerId" />
+		<result column="txLogisticID" jdbcType="VARCHAR" property="txLogisticID" />
+		<result column="tradeNo" jdbcType="VARCHAR" property="tradeNo" />
+		<result column="mailNo" jdbcType="VARCHAR" property="mailNo" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="orderType" jdbcType="INTEGER" property="orderType" />
+		<result column="serviceType" jdbcType="INTEGER" property="serviceType" />
+		<result column="flag" jdbcType="INTEGER" property="flag" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="postCode" jdbcType="VARCHAR" property="postCode" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="prov" jdbcType="VARCHAR" property="prov" />
+		<result column="city" jdbcType="VARCHAR" property="city" />
+		<result column="country" jdbcType="VARCHAR" property="country" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="sendStartTime" jdbcType="DATE" property="sendStartTime" />
+		<result column="sendEndTime" jdbcType="DATE" property="sendEndTime" />
+		<result column="goodsValue" jdbcType="DOUBLE" property="goodsValue" />
+		<result column="totalValue" jdbcType="DOUBLE" property="totalValue" />
+		<result column="agencyFund" jdbcType="DOUBLE" property="agencyFund" />
+		<result column="itemsValue" jdbcType="DOUBLE" property="itemsValue" />
+		<result column="itemsWeight" jdbcType="DOUBLE" property="itemsWeight" />
+		<result column="itemName" jdbcType="VARCHAR" property="itemName" />
+		<result column="number" jdbcType="INTEGER" property="number" />
+		<result column="itemValue" jdbcType="DOUBLE" property="itemValue" />
+		<result column="special" jdbcType="INTEGER" property="special" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="insuranceValue" jdbcType="DOUBLE" property="insuranceValue" />
+		<result column="totalServiceFee" jdbcType="DOUBLE" property="totalServiceFee" />
+		<result column="codSplitFee" jdbcType="DOUBLE" property="codSplitFee" />
+		<result column="reciveTime" jdbcType="DATE" property="reciveTime" />
+		<result column="upTime" jdbcType="DATE" property="upTime" />
+		<result column="upStatus" jdbcType="INTEGER" property="upStatus" />
+		<result column="upError" jdbcType="VARCHAR" property="upError" />
+		<result column="backTime" jdbcType="DATE" property="backTime" />
+		<result column="backError" jdbcType="VARCHAR" property="backError" />
+		<result column="backStatus" jdbcType="INTEGER" property="backStatus" />
+	</resultMap>
+
+	<select id="selectWorkOrder" parameterType="map" resultMap="BaseResultMap">
+		select * from WorkOrder
+		<if test="workOrderWhere != null">
+			<where>
+				1=1
+				<if test="workOrderWhere.id != null and workOrderWhere.id != ''">
+					and id = #{workOrderWhere.id,jdbcType=INTEGER}
+				</if>
+
+				<if test="workOrderWhere.companyName!= null">
+					and companyName = #{workOrderWhere.companyName,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.clientID != null">
+					and clientID = #{workOrderWhere.clientID,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.logisticProviderID != null">
+					and logisticProviderID =
+					#{workOrderWhere.logisticProviderID,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.customerId != null">
+					and customerId = #{workOrderWhere.customerId,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.txLogisticID != null">
+					and txLogisticID = #{workOrderWhere.txLogisticID,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.tradeNo != null">
+					and tradeNo = #{workOrderWhere.tradeNo,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.mailNo != null">
+					and mailNo = #{workOrderWhere.mailNo,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.type != null">
+					and type = #{workOrderWhere.type,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.orderType != null">
+					orderType = #{workOrderWhere.orderType,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.serviceType != null">
+					and serviceType = #{workOrderWhere.serviceType,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.flag != null">
+					and flag = #{workOrderWhere.flag,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.name != null">
+					and name = #{workOrderWhere.name,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.postCode != null">
+					and postCode = #{workOrderWhere.postCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.phone != null">
+					and phone = #{workOrderWhere.phone,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.mobile != null">
+					mobile = #{workOrderWhere.mobile,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.prov != null">
+					and prov = #{workOrderWhere.prov,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.city != null">
+					and city = #{workOrderWhere.city,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.country != null">
+					and country = #{workOrderWhere.country,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.address != null">
+					and address = #{workOrderWhere.address,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.sendStartTime != null">
+					and sendStartTime = #{workOrderWhere.sendStartTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.sendEndTime != null">
+					and sendEndTime = #{workOrderWhere.sendEndTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.goodsValue != null">
+					and goodsValue = #{workOrderWhere.goodsValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.totalValue != null">
+					and totalValue = #{workOrderWhere.totalValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.agencyFund != null">
+					and agencyFund = #{workOrderWhere.agencyFund,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.itemsValue != null">
+					and itemsValue = #{workOrderWhere.itemsValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.itemsWeight != null">
+					and itemsWeight = #{workOrderWhere.itemsWeight,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.itemName != null">
+					and itemName = #{workOrderWhere.itemName,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.number != null">
+					and number = #{workOrderWhere.number,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.itemValue != null">
+					and itemValue = #{workOrderWhere.itemValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.special != null">
+					and special = #{workOrderWhere.special,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.remark != null">
+					and remark = #{workOrderWhere.remark,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.insuranceValue != null">
+					and insuranceValue = #{workOrderWhere.insuranceValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.totalServiceFee != null">
+					and totalServiceFee =
+					#{workOrderWhere.totalServiceFee,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.codSplitFee != null">
+					and codSplitFee = #{workOrderWhere.codSplitFee,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.reciveTime != null">
+					and reciveTime = #{workOrderWhere.reciveTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.upTime != null">
+					and upTime = #{workOrderWhere.upTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.upStatus != null">
+					and upStatus = #{workOrderWhere.upStatus,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.upError != null">
+					and upError = #{workOrderWhere.upError,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.backTime != null">
+					and backTime = #{workOrderWhere.backTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.backError != null">
+					and backError = #{workOrderWhere.backError,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.backStatus != null">
+					and backStatus = #{workOrderWhere.backStatus,jdbcType=INTEGER},
+				</if>
+			</where>
+		</if>
+		limit #{startsize,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
+	</select>
+
+	<insert id="insertWorkOrder" parameterType="map">
+		insert into WorkOrder
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="workOrder.id != null">
+				id,
+			</if>
+			<if test="workOrder.companyName!= null">
+				companyName,
+			</if>
+			<if test="workOrder.clientID != null">
+				clientID,
+			</if>
+			<if test="workOrder.logisticProviderID != null">
+				logisticProviderID,
+			</if>
+			<if test="workOrder.customerId != null">
+				customerId,
+			</if>
+			<if test="workOrder.txLogisticID != null">
+				txLogisticID,
+			</if>
+			<if test="workOrder.tradeNo != null">
+				tradeNo,
+			</if>
+			<if test="workOrder.mailNo != null">
+				mailNo,
+			</if>
+			<if test="workOrder.type != null">
+				type,
+			</if>
+			<if test="workOrder.orderType != null">
+				orderType,
+			</if>
+			<if test="workOrder.serviceType != null">
+				serviceType,
+			</if>
+			<if test="workOrder.flag != null">
+				flag,
+			</if>
+			<if test="workOrder.name != null">
+				name,
+			</if>
+			<if test="workOrder.postCode != null">
+				postCode,
+			</if>
+			<if test="workOrder.phone != null">
+				phone,
+			</if>
+			<if test="workOrder.mobile != null">
+				mobile,
+			</if>
+			<if test="workOrder.prov != null">
+				prov,
+			</if>
+			<if test="workOrder.city != null">
+				city,
+			</if>
+			<if test="workOrder.country != null">
+				country,
+			</if>
+			<if test="workOrder.address != null">
+				address,
+			</if>
+			<if test="workOrder.sendStartTime != null">
+				sendStartTime,
+			</if>
+			<if test="workOrder.sendEndTime != null">
+				sendEndTime,
+			</if>
+			<if test="workOrder.goodsValue != null">
+				goodsValue,
+			</if>
+			<if test="workOrder.totalValue != null">
+				totalValue,
+			</if>
+			<if test="workOrder.agencyFund != null">
+				agencyFund,
+			</if>
+			<if test="workOrder.itemsValue != null">
+				itemsValue,
+			</if>
+			<if test="workOrder.itemsWeight != null">
+				itemsWeight,
+			</if>
+			<if test="workOrder.itemName != null">
+				itemName,
+			</if>
+			<if test="workOrder.number != null">
+				number,
+			</if>
+			<if test="workOrder.itemValue != null">
+				itemValue,
+			</if>
+			<if test="workOrder.special != null">
+				special,
+			</if>
+			<if test="workOrder.remark != null">
+				remark,
+			</if>
+			<if test="workOrder.insuranceValue != null">
+				insuranceValue,
+			</if>
+			<if test="workOrder.totalServiceFee != null">
+				totalServiceFee,
+			</if>
+			<if test="workOrder.codSplitFee != null">
+				codSplitFee,
+			</if>
+			<if test="workOrder.reciveTime != null">
+				reciveTime,
+			</if>
+			<if test="workOrder.upTime != null">
+				upTime,
+			</if>
+			<if test="workOrder.upStatus != null">
+				upStatus,
+			</if>
+			<if test="workOrder.upError != null">
+				upError,
+			</if>
+			<if test="workOrder.backTime != null">
+				backTime,
+			</if>
+			<if test="workOrder.backError != null">
+				backError,
+			</if>
+			<if test="workOrder.backStatus != null">
+				backStatus,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="workOrder.id != null">
+				#{workOrder.id,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.companyName!= null">
+				#{workOrder.companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.clientID != null">
+				#{workOrder.clientID,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.logisticProviderID != null">
+				#{workOrder.logisticProviderID,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.customerId != null">
+				#{workOrder.customerId,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.txLogisticID != null">
+				#{workOrder.txLogisticID,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.tradeNo != null">
+				#{workOrder.tradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.mailNo != null">
+				#{workOrder.mailNo,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.type != null">
+				#{workOrder.type,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.orderType != null">
+				#{workOrder.orderType,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.serviceType != null">
+				#{workOrder.serviceType,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.flag != null">
+				#{workOrder.flag,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.name != null">
+				#{workOrder.name,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.postCode != null">
+				#{workOrder.postCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.phone != null">
+				#{workOrder.phone,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.mobile != null">
+				#{workOrder.mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.prov != null">
+				#{workOrder.prov,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.city != null">
+				#{workOrder.city,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.country != null">
+				#{workOrder.country,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.address != null">
+				#{workOrder.address,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.sendStartTime != null">
+				#{workOrder.sendStartTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.sendEndTime != null">
+				#{workOrder.sendEndTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.goodsValue != null">
+				#{workOrder.goodsValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.totalValue != null">
+				#{workOrder.totalValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.agencyFund != null">
+				#{workOrder.agencyFund,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.itemsValue != null">
+				#{workOrder.itemsValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.itemsWeight != null">
+				#{workOrder.itemsWeight,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.itemName != null">
+				#{workOrder.itemName,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.number != null">
+				#{workOrder.number,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.itemValue != null">
+				#{workOrder.itemValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.special != null">
+				#{workOrder.special,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.remark != null">
+				#{workOrder.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.insuranceValue != null">
+				#{workOrder.insuranceValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.totalServiceFee != null">
+				#{workOrder.totalServiceFee,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.codSplitFee != null">
+				#{workOrder.codSplitFee,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.reciveTime != null">
+				#{workOrder.reciveTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.upTime != null">
+				#{workOrder.upTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.upStatus != null">
+				#{workOrder.upStatus,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.upError != null">
+				#{workOrder.upError,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.backTime != null">
+				#{workOrder.backTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.backError != null">
+				#{workOrder.backError,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.backStatus != null">
+				#{workOrder.backStatus,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateWorkOrder" parameterType="map">
+		update WorkOrder
+		<set>
+			<if test="workOrder.id != null">
+				id = #{workOrder.id,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.companyName!= null">
+				companyName = #{workOrder.companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.clientID != null">
+				clientID = #{workOrder.clientID,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.logisticProviderID != null">
+				logisticProviderID =
+				#{workOrder.logisticProviderID,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.customerId != null">
+				customerId = #{workOrder.customerId,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.txLogisticID != null">
+				txLogisticID =
+				#{workOrder.txLogisticID,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.tradeNo != null">
+				tradeNo = #{workOrder.tradeNo,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.mailNo != null">
+				mailNo = #{workOrder.mailNo,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.type != null">
+				type = #{workOrder.type,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.orderType != null">
+				orderType = #{workOrder.orderType,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.serviceType != null">
+				serviceType = #{workOrder.serviceType,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.flag != null">
+				flag = #{workOrder.flag,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.name != null">
+				name = #{workOrder.name,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.postCode != null">
+				postCode = #{workOrder.postCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.phone != null">
+				phone = #{workOrder.phone,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.mobile != null">
+				mobile = #{workOrder.mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.prov != null">
+				prov = #{workOrder.prov,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.city != null">
+				city = #{workOrder.city,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.country != null">
+				country = #{workOrder.country,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.address != null">
+				address = #{workOrder.address,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.sendStartTime != null">
+				sendStartTime = #{workOrder.sendStartTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.sendEndTime != null">
+				sendEndTime = #{workOrder.sendEndTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.goodsValue != null">
+				goodsValue = #{workOrder.goodsValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.totalValue != null">
+				totalValue = #{workOrder.totalValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.agencyFund != null">
+				agencyFund = #{workOrder.agencyFund,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.itemsValue != null">
+				itemsValue = #{workOrder.itemsValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.itemsWeight != null">
+				itemsWeight = #{workOrder.itemsWeight,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.itemName != null">
+				itemName = #{workOrder.itemName,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.number != null">
+				number = #{workOrder.number,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.itemValue != null">
+				itemValue = #{workOrder.itemValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.special != null">
+				special = #{workOrder.special,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.remark != null">
+				remark = #{workOrder.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.insuranceValue != null">
+				insuranceValue =
+				#{workOrder.insuranceValue,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.totalServiceFee != null">
+				totalServiceFee =
+				#{workOrder.totalServiceFee,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.codSplitFee != null">
+				codSplitFee = #{workOrder.codSplitFee,jdbcType=DOUBLE},
+			</if>
+			<if test="workOrder.reciveTime != null">
+				reciveTime = #{workOrder.reciveTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.upTime != null">
+				upTime = #{workOrder.upTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.upStatus != null">
+				upStatus = #{workOrder.upStatus,jdbcType=INTEGER},
+			</if>
+			<if test="workOrder.upError != null">
+				upError = #{workOrder.upError,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.backTime != null">
+				backTime = #{workOrder.backTime,jdbcType=DATE},
+			</if>
+			<if test="workOrder.backError != null">
+				backError = #{workOrder.backError,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.backStatus != null">
+				backStatus = #{workOrder.backStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="workOrderWhere != null">
+			<where>
+				1=1
+				<if test="workOrderWhere.id != null and workOrderWhere.id != ''">
+					and id = #{workOrderWhere.id,jdbcType=INTEGER}
+				</if>
+
+				<if test="workOrderWhere.companyName!= null">
+					and companyName = #{workOrderWhere.companyName,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.clientID != null">
+					and clientID = #{workOrderWhere.clientID,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.logisticProviderID != null">
+					and logisticProviderID =
+					#{workOrderWhere.logisticProviderID,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.customerId != null">
+					and customerId = #{workOrderWhere.customerId,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.txLogisticID != null">
+					and txLogisticID = #{workOrderWhere.txLogisticID,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.tradeNo != null">
+					and tradeNo = #{workOrderWhere.tradeNo,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.mailNo != null">
+					and mailNo = #{workOrderWhere.mailNo,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.type != null">
+					and type = #{workOrderWhere.type,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.orderType != null">
+					orderType = #{workOrderWhere.orderType,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.serviceType != null">
+					and serviceType = #{workOrderWhere.serviceType,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.flag != null">
+					and flag = #{workOrderWhere.flag,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.name != null">
+					and name = #{workOrderWhere.name,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.postCode != null">
+					and postCode = #{workOrderWhere.postCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.phone != null">
+					and phone = #{workOrderWhere.phone,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.mobile != null">
+					mobile = #{workOrderWhere.mobile,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.prov != null">
+					and prov = #{workOrderWhere.prov,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.city != null">
+					and city = #{workOrderWhere.city,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.country != null">
+					and country = #{workOrderWhere.country,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.address != null">
+					and address = #{workOrderWhere.address,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.sendStartTime != null">
+					and sendStartTime = #{workOrderWhere.sendStartTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.sendEndTime != null">
+					and sendEndTime = #{workOrderWhere.sendEndTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.goodsValue != null">
+					and goodsValue = #{workOrderWhere.goodsValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.totalValue != null">
+					and totalValue = #{workOrderWhere.totalValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.agencyFund != null">
+					and agencyFund = #{workOrderWhere.agencyFund,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.itemsValue != null">
+					and itemsValue = #{workOrderWhere.itemsValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.itemsWeight != null">
+					and itemsWeight = #{workOrderWhere.itemsWeight,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.itemName != null">
+					and itemName = #{workOrderWhere.itemName,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.number != null">
+					and number = #{workOrderWhere.number,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.itemValue != null">
+					and itemValue = #{workOrderWhere.itemValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.special != null">
+					and special = #{workOrderWhere.special,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.remark != null">
+					and remark = #{workOrderWhere.remark,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.insuranceValue != null">
+					and insuranceValue = #{workOrderWhere.insuranceValue,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.totalServiceFee != null">
+					and totalServiceFee =
+					#{workOrderWhere.totalServiceFee,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.codSplitFee != null">
+					and codSplitFee = #{workOrderWhere.codSplitFee,jdbcType=DOUBLE},
+				</if>
+				<if test="workOrderWhere.reciveTime != null">
+					and reciveTime = #{workOrderWhere.reciveTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.upTime != null">
+					and upTime = #{workOrderWhere.upTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.upStatus != null">
+					and upStatus = #{workOrderWhere.upStatus,jdbcType=INTEGER},
+				</if>
+				<if test="workOrderWhere.upError != null">
+					and upError = #{workOrderWhere.upError,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.backTime != null">
+					and backTime = #{workOrderWhere.backTime,jdbcType=DATE},
+				</if>
+				<if test="workOrderWhere.backError != null">
+					and backError = #{workOrderWhere.backError,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.backStatus != null">
+					and backStatus = #{workOrderWhere.backStatus,jdbcType=INTEGER},
+				</if>
+			</where>
+		</if>
+
+	</update>
+</mapper>

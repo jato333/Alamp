@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dc.erp.dao.UserDao">
+	<resultMap id="BaseResultMap" type="com.dc.erp.entity.User">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="age" jdbcType="INTEGER" property="age" />
+		<result column="createTime" jdbcType="DATE" property="createtime" />
+	</resultMap>
+
+	<select id="selectUser" parameterType="map" resultMap="BaseResultMap">
+		select * from user
+		<if test="userWhere != null">
+			<where>
+				1=1
+				<if test="userWhere.id != null and userWhere.id != ''">
+					and id = #{userWhere.id,jdbcType=INTEGER}
+				</if>
+
+				<if test="userWhere.password != null">
+					and password = #{userWhere.password,jdbcType=VARCHAR}
+				</if>
+
+				<if test="userWhere.age != null and userWhere.age!=0">
+					and age = #{userWhere.age,jdbcType=INTEGER}
+				</if>
+
+				<if
+					test="userWhere.createtimeBG != null and userWhere.createtimeED!=null">
+					and createTime between
+					#{userWhere.createtimeBG,jdbcType=DATE}
+					and
+					#{userWhere.createtimeED,jdbcType=DATE}
+				</if>
+			</where>
+		</if>
+		limit #{startsize,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
+	</select>
+
+	<select id="getLogin" parameterType="map" resultMap="BaseResultMap">
+		select * from user
+		<if test="userWhere != null">
+			<where>
+				1=1
+				<if test="userWhere.name != null and userWhere.name != ''">
+					and name = #{userWhere.name,jdbcType=VARCHAR}
+				</if>
+
+				<if test="userWhere.password != null">
+					and password = #{userWhere.password,jdbcType=VARCHAR}
+				</if>
+			</where>
+		</if>
+		limit 1
+	</select>
+
+	<insert id="insertUser" parameterType="map">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="user.id != null">
+				id,
+			</if>
+			<if test="user.name != null">
+				name,
+			</if>
+			<if test="user.password != null">
+				password,
+			</if>
+			<if test="user.age != null">
+				age,
+			</if>
+			<if test="user.createtime != null">
+				createTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="user.id != null">
+				#{user.id,jdbcType=INTEGER},
+			</if>
+			<if test="user.name != null">
+				#{user.name,jdbcType=VARCHAR},
+			</if>
+			<if test="user.password != null">
+				#{user.password,jdbcType=VARCHAR},
+			</if>
+			<if test="user.age != null">
+				#{user.age,jdbcType=INTEGER},
+			</if>
+			<if test="user.createtime != null">
+				#{user.createtime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateUser" parameterType="map">
+		update user
+		<set>
+			<if test="user.name != null">
+				name = #{record.name,jdbcType=VARCHAR},
+			</if>
+			<if test="user.password != null">
+				password = #{record.password,jdbcType=VARCHAR},
+			</if>
+			<if test="user.age != null">
+				age = #{record.age,jdbcType=INTEGER},
+			</if>
+			<if test="user.createtime != null">
+				createTime = #{record.createtime,jdbcType=DATE},
+			</if>
+		</set>
+		<if test="userWhere != null">
+			<where>
+				1=1
+				<if test="userWhere.id != null and userWhere.id != ''">
+					and id = #{userWhere.id,jdbcType=INTEGER}
+				</if>
+
+				<if test="userWhere.password != null">
+					and password = #{userWhere.password,jdbcType=VARCHAR}
+				</if>
+
+				<if test="userWhere.age != null and userWhere.age!=0">
+					and age = #{userWhere.age,jdbcType=INTEGER}
+				</if>
+
+				<if
+					test="userWhere.createtimeBG != null and userWhere.createtimeED!=null">
+					and createTime between
+					#{userWhere.createtimeBG,jdbcType=DATE}
+					and
+					#{userWhere.createtimeED,jdbcType=DATE}
+				</if>
+			</where>
+		</if>
+
+	</update>
+</mapper>
