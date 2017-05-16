@@ -93,7 +93,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>erp</warName>
+					<warName>alamp</warName>
 				</configuration>
 			</plugin>
 			<plugin>
