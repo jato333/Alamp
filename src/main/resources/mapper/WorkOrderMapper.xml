@@ -90,16 +90,16 @@
 				<if test="workOrderWhere.mailNo != null">
 					and mailNo = #{workOrderWhere.mailNo,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.type != null">
+				<if test="workOrderWhere.type != null and workOrderWhere.type != ''">
 					and type = #{workOrderWhere.type,jdbcType=INTEGER},
 				</if>
-				<if test="workOrderWhere.orderType != null">
+				<if test="workOrderWhere.orderType != null and workOrderWhere.orderType != ''">
 					orderType = #{workOrderWhere.orderType,jdbcType=INTEGER},
 				</if>
-				<if test="workOrderWhere.serviceType != null">
+				<if test="workOrderWhere.serviceType != null and workOrderWhere.serviceType != ''">
 					and serviceType = #{workOrderWhere.serviceType,jdbcType=INTEGER},
 				</if>
-				<if test="workOrderWhere.flag != null">
+				<if test="workOrderWhere.flag != null and workOrderWhere.flag != ''">
 					and flag = #{workOrderWhere.flag,jdbcType=INTEGER},
 				</if>
 				
@@ -177,13 +177,13 @@
 				<if test="workOrderWhere.itemName != null">
 					and itemName = #{workOrderWhere.itemName,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.number != null">
+				<if test="workOrderWhere.number != null and workOrderWhere.number != ''">
 					and number = #{workOrderWhere.number,jdbcType=INTEGER},
 				</if>
 				<if test="workOrderWhere.itemValue != null">
 					and itemValue = #{workOrderWhere.itemValue,jdbcType=DOUBLE},
 				</if>
-				<if test="workOrderWhere.special != null">
+				<if test="workOrderWhere.special != null and workOrderWhere.special != ''">
 					and special = #{workOrderWhere.special,jdbcType=INTEGER},
 				</if>
 				<if test="workOrderWhere.remark != null">
@@ -227,7 +227,6 @@
 				<if test="workOrderWhere.printStatus != null">
 					and printStatus = #{workOrderWhere.printStatus,jdbcType=INTEGER},
 				</if>
-				
 				
 				<if test="workOrderWhere.backTime != null">
 					and backTime = #{workOrderWhere.backTime,jdbcType=DATE},
