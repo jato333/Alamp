@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dc.erp.dao.WorkOrderDao">
-	<resultMap id="BaseResultMap" type="com.dc.erp.entity.WorkOrder">
+<mapper namespace="com.renyuwo.alamp.dao.WorkOrderDao">
+	<resultMap id="BaseResultMap" type="com.renyuwo.alamp.entity.WorkOrder">
 		<result column="id" jdbcType="INTEGER" property="id" />
 		<result column="companyName" jdbcType="VARCHAR" property="companyName" />
 		<result column="clientID" jdbcType="VARCHAR" property="clientID" />
