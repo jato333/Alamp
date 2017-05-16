@@ -5,8 +5,7 @@
 		<result column="id" jdbcType="INTEGER" property="id" />
 		<result column="companyName" jdbcType="VARCHAR" property="companyName" />
 		<result column="clientID" jdbcType="VARCHAR" property="clientID" />
-		<result column="logisticProviderID" jdbcType="VARCHAR"
-			property="logisticProviderID" />
+		<result column="logisticProviderID" jdbcType="VARCHAR" property="logisticProviderID" />
 		<result column="customerId" jdbcType="VARCHAR" property="customerId" />
 		<result column="txLogisticID" jdbcType="VARCHAR" property="txLogisticID" />
 		<result column="tradeNo" jdbcType="VARCHAR" property="tradeNo" />
@@ -15,14 +14,22 @@
 		<result column="orderType" jdbcType="INTEGER" property="orderType" />
 		<result column="serviceType" jdbcType="INTEGER" property="serviceType" />
 		<result column="flag" jdbcType="INTEGER" property="flag" />
-		<result column="name" jdbcType="VARCHAR" property="name" />
-		<result column="postCode" jdbcType="VARCHAR" property="postCode" />
-		<result column="phone" jdbcType="VARCHAR" property="phone" />
-		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
-		<result column="prov" jdbcType="VARCHAR" property="prov" />
-		<result column="city" jdbcType="VARCHAR" property="city" />
-		<result column="country" jdbcType="VARCHAR" property="country" />
-		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="sname" jdbcType="VARCHAR" property="sname" />
+		<result column="spostCode" jdbcType="VARCHAR" property="spostCode" />
+		<result column="sphone" jdbcType="VARCHAR" property="sphone" />
+		<result column="smobile" jdbcType="VARCHAR" property="smobile" />
+		<result column="sprov" jdbcType="VARCHAR" property="sprov" />
+		<result column="scity" jdbcType="VARCHAR" property="scity" />
+		<result column="scountry" jdbcType="VARCHAR" property="scountry" />
+		<result column="saddress" jdbcType="VARCHAR" property="saddress" />
+		<result column="rname" jdbcType="VARCHAR" property="rname" />
+		<result column="rpostCode" jdbcType="VARCHAR" property="rpostCode" />
+		<result column="rphone" jdbcType="VARCHAR" property="rphone" />
+		<result column="rmobile" jdbcType="VARCHAR" property="rmobile" />
+		<result column="rprov" jdbcType="VARCHAR" property="rprov" />
+		<result column="rcity" jdbcType="VARCHAR" property="rcity" />
+		<result column="rcountry" jdbcType="VARCHAR" property="rcountry" />
+		<result column="raddress" jdbcType="VARCHAR" property="raddress" />
 		<result column="sendStartTime" jdbcType="DATE" property="sendStartTime" />
 		<result column="sendEndTime" jdbcType="DATE" property="sendEndTime" />
 		<result column="goodsValue" jdbcType="DOUBLE" property="goodsValue" />
@@ -42,6 +49,11 @@
 		<result column="upTime" jdbcType="DATE" property="upTime" />
 		<result column="upStatus" jdbcType="INTEGER" property="upStatus" />
 		<result column="upError" jdbcType="VARCHAR" property="upError" />
+		<result column="shortAddress" jdbcType="VARCHAR" property="shortAddress" />
+		<result column="consigneeBranchCode" jdbcType="VARCHAR" property="consigneeBranchCode" />
+		<result column="packageCenterCode" jdbcType="VARCHAR" property="packageCenterCode" />
+		<result column="packageCenterName" jdbcType="VARCHAR" property="packageCenterName" />
+		<result column="printStatus" jdbcType="INTEGER" property="printStatus" />
 		<result column="backTime" jdbcType="DATE" property="backTime" />
 		<result column="backError" jdbcType="VARCHAR" property="backError" />
 		<result column="backStatus" jdbcType="INTEGER" property="backStatus" />
@@ -90,30 +102,57 @@
 				<if test="workOrderWhere.flag != null">
 					and flag = #{workOrderWhere.flag,jdbcType=INTEGER},
 				</if>
-				<if test="workOrderWhere.name != null">
-					and name = #{workOrderWhere.name,jdbcType=VARCHAR},
+				
+				<if test="workOrderWhere.sname != null">
+					and sname = #{workOrderWhere.sname,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.postCode != null">
-					and postCode = #{workOrderWhere.postCode,jdbcType=VARCHAR},
+				<if test="workOrderWhere.spostCode != null">
+					and spostCode = #{workOrderWhere.spostCode,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.phone != null">
-					and phone = #{workOrderWhere.phone,jdbcType=VARCHAR},
+				<if test="workOrderWhere.sphone != null">
+					and sphone = #{workOrderWhere.sphone,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.mobile != null">
-					mobile = #{workOrderWhere.mobile,jdbcType=VARCHAR},
+				<if test="workOrderWhere.smobile != null">
+					and smobile = #{workOrderWhere.smobile,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.prov != null">
-					and prov = #{workOrderWhere.prov,jdbcType=VARCHAR},
+				<if test="workOrderWhere.sprov != null">
+					and sprov = #{workOrderWhere.sprov,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.city != null">
-					and city = #{workOrderWhere.city,jdbcType=VARCHAR},
+				<if test="workOrderWhere.scity != null">
+					and scity = #{workOrderWhere.scity,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.country != null">
-					and country = #{workOrderWhere.country,jdbcType=VARCHAR},
+				<if test="workOrderWhere.scountry != null">
+					and scountry = #{workOrderWhere.scountry,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.address != null">
-					and address = #{workOrderWhere.address,jdbcType=VARCHAR},
+				<if test="workOrderWhere.saddress != null">
+					and saddress = #{workOrderWhere.saddress,jdbcType=VARCHAR},
 				</if>
+				
+				<if test="workOrderWhere.rname != null">
+					and rname = #{workOrderWhere.rname,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rpostCode != null">
+					and rpostCode = #{workOrderWhere.rpostCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rphone != null">
+					and rphone = #{workOrderWhere.rphone,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rmobile != null">
+					and rmobile = #{workOrderWhere.rmobile,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rprov != null">
+					and rprov = #{workOrderWhere.rprov,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rcity != null">
+					and rcity = #{workOrderWhere.rcity,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rcountry != null">
+					and rcountry = #{workOrderWhere.rcountry,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.raddress != null">
+					and raddress = #{workOrderWhere.raddress,jdbcType=VARCHAR},
+				</if>
+				
 				<if test="workOrderWhere.sendStartTime != null">
 					and sendStartTime = #{workOrderWhere.sendStartTime,jdbcType=DATE},
 				</if>
@@ -154,8 +193,7 @@
 					and insuranceValue = #{workOrderWhere.insuranceValue,jdbcType=DOUBLE},
 				</if>
 				<if test="workOrderWhere.totalServiceFee != null">
-					and totalServiceFee =
-					#{workOrderWhere.totalServiceFee,jdbcType=DOUBLE},
+					and totalServiceFee =#{workOrderWhere.totalServiceFee,jdbcType=DOUBLE},
 				</if>
 				<if test="workOrderWhere.codSplitFee != null">
 					and codSplitFee = #{workOrderWhere.codSplitFee,jdbcType=DOUBLE},
@@ -172,6 +210,25 @@
 				<if test="workOrderWhere.upError != null">
 					and upError = #{workOrderWhere.upError,jdbcType=VARCHAR},
 				</if>
+				
+				<if test="workOrderWhere.shortAddress != null">
+					and shortAddress = #{workOrderWhere.shortAddress,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.consigneeBranchCode != null">
+					and consigneeBranchCode = #{workOrderWhere.consigneeBranchCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.packageCenterCode != null">
+					and packageCenterCode = #{workOrderWhere.packageCenterCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.packageCenterName != null">
+					and packageCenterName = #{workOrderWhere.packageCenterName,jdbcType=VARCHAR},
+				</if>
+				
+				<if test="workOrderWhere.printStatus != null">
+					and printStatus = #{workOrderWhere.printStatus,jdbcType=INTEGER},
+				</if>
+				
+				
 				<if test="workOrderWhere.backTime != null">
 					and backTime = #{workOrderWhere.backTime,jdbcType=DATE},
 				</if>
@@ -225,30 +282,57 @@
 			<if test="workOrder.flag != null">
 				flag,
 			</if>
-			<if test="workOrder.name != null">
-				name,
+			
+			<if test="workOrder.sname != null">
+				sname,
 			</if>
-			<if test="workOrder.postCode != null">
-				postCode,
+			<if test="workOrder.spostCode != null">
+				spostCode,
 			</if>
-			<if test="workOrder.phone != null">
-				phone,
+			<if test="workOrder.sphone != null">
+				sphone,
 			</if>
-			<if test="workOrder.mobile != null">
-				mobile,
+			<if test="workOrder.smobile != null">
+				smobile,
 			</if>
-			<if test="workOrder.prov != null">
-				prov,
+			<if test="workOrder.sprov != null">
+				sprov,
 			</if>
-			<if test="workOrder.city != null">
-				city,
+			<if test="workOrder.scity != null">
+				scity,
 			</if>
-			<if test="workOrder.country != null">
-				country,
+			<if test="workOrder.scountry != null">
+				scountry,
 			</if>
-			<if test="workOrder.address != null">
-				address,
+			<if test="workOrder.saddress != null">
+				saddress,
 			</if>
+			
+			<if test="workOrder.rname != null">
+				rname,
+			</if>
+			<if test="workOrder.rpostCode != null">
+				rpostCode,
+			</if>
+			<if test="workOrder.rphone != null">
+				rphone,
+			</if>
+			<if test="workOrder.rmobile != null">
+				rmobile,
+			</if>
+			<if test="workOrder.rprov != null">
+				rprov,
+			</if>
+			<if test="workOrder.rcity != null">
+				rcity,
+			</if>
+			<if test="workOrder.rcountry != null">
+				rcountry,
+			</if>
+			<if test="workOrder.raddress != null">
+				raddress,
+			</if>
+			
 			<if test="workOrder.sendStartTime != null">
 				sendStartTime,
 			</if>
@@ -306,6 +390,24 @@
 			<if test="workOrder.upError != null">
 				upError,
 			</if>
+			
+			<if test="workOrder.shortAddress != null">
+				shortAddress,
+			</if>
+			<if test="workOrder.consigneeBranchCode != null">
+				consigneeBranchCode,
+			</if>
+			<if test="workOrder.packageCenterCode != null">
+				packageCenterCode,
+			</if>
+			<if test="workOrder.packageCenterName != null">
+				packageCenterName,
+			</if>
+			
+			<if test="workOrder.printStatus != null">
+				printStatus,
+			</if>
+			
 			<if test="workOrder.backTime != null">
 				backTime,
 			</if>
@@ -353,30 +455,57 @@
 			<if test="workOrder.flag != null">
 				#{workOrder.flag,jdbcType=INTEGER},
 			</if>
-			<if test="workOrder.name != null">
-				#{workOrder.name,jdbcType=VARCHAR},
+			
+			<if test="workOrder.sname != null">
+				#{workOrder.sname,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.postCode != null">
-				#{workOrder.postCode,jdbcType=VARCHAR},
+			<if test="workOrder.spostCode != null">
+				#{workOrder.spostCode,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.phone != null">
-				#{workOrder.phone,jdbcType=VARCHAR},
+			<if test="workOrder.sphone != null">
+				#{workOrder.sphone,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.mobile != null">
-				#{workOrder.mobile,jdbcType=VARCHAR},
+			<if test="workOrder.smobile != null">
+				#{workOrder.smobile,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.prov != null">
-				#{workOrder.prov,jdbcType=VARCHAR},
+			<if test="workOrder.sprov != null">
+				#{workOrder.sprov,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.city != null">
-				#{workOrder.city,jdbcType=VARCHAR},
+			<if test="workOrder.scity != null">
+				#{workOrder.scity,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.country != null">
-				#{workOrder.country,jdbcType=VARCHAR},
+			<if test="workOrder.scountry != null">
+				#{workOrder.scountry,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.address != null">
-				#{workOrder.address,jdbcType=VARCHAR},
+			<if test="workOrder.saddress != null">
+				#{workOrder.saddress,jdbcType=VARCHAR},
 			</if>
+			
+			<if test="workOrder.rname != null">
+				#{workOrder.rname,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rpostCode != null">
+				#{workOrder.rpostCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rphone != null">
+				#{workOrder.rphone,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rmobile != null">
+				#{workOrder.rmobile,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rprov != null">
+				#{workOrder.rprov,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rcity != null">
+				#{workOrder.rcity,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rcountry != null">
+				#{workOrder.rcountry,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.raddress != null">
+				#{workOrder.raddress,jdbcType=VARCHAR},
+			</if>
+			
 			<if test="workOrder.sendStartTime != null">
 				#{workOrder.sendStartTime,jdbcType=DATE},
 			</if>
@@ -434,6 +563,24 @@
 			<if test="workOrder.upError != null">
 				#{workOrder.upError,jdbcType=VARCHAR},
 			</if>
+			
+			<if test="workOrder.shortAddress != null">
+				#{workOrder.shortAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.consigneeBranchCode != null">
+				#{workOrder.consigneeBranchCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.packageCenterCode != null">
+				#{workOrder.packageCenterCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.packageCenterName != null">
+				#{workOrder.packageCenterName,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="workOrder.printStatus != null">
+				#{workOrder.printStatus,jdbcType=INTEGER},
+			</if>
+				
 			<if test="workOrder.backTime != null">
 				#{workOrder.backTime,jdbcType=DATE},
 			</if>
@@ -459,15 +606,13 @@
 				clientID = #{workOrder.clientID,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.logisticProviderID != null">
-				logisticProviderID =
-				#{workOrder.logisticProviderID,jdbcType=VARCHAR},
+				logisticProviderID = #{workOrder.logisticProviderID,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.customerId != null">
 				customerId = #{workOrder.customerId,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.txLogisticID != null">
-				txLogisticID =
-				#{workOrder.txLogisticID,jdbcType=VARCHAR},
+				txLogisticID = #{workOrder.txLogisticID,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.tradeNo != null">
 				tradeNo = #{workOrder.tradeNo,jdbcType=VARCHAR},
@@ -487,30 +632,57 @@
 			<if test="workOrder.flag != null">
 				flag = #{workOrder.flag,jdbcType=INTEGER},
 			</if>
-			<if test="workOrder.name != null">
-				name = #{workOrder.name,jdbcType=VARCHAR},
+			
+			<if test="workOrder.sname != null">
+				sname = #{workOrder.sname,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.postCode != null">
-				postCode = #{workOrder.postCode,jdbcType=VARCHAR},
+			<if test="workOrder.spostCode != null">
+				spostCode = #{workOrder.spostCode,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.phone != null">
-				phone = #{workOrder.phone,jdbcType=VARCHAR},
+			<if test="workOrder.sphone != null">
+				sphone = #{workOrder.sphone,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.mobile != null">
-				mobile = #{workOrder.mobile,jdbcType=VARCHAR},
+			<if test="workOrder.smobile != null">
+				smobile = #{workOrder.smobile,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.prov != null">
-				prov = #{workOrder.prov,jdbcType=VARCHAR},
+			<if test="workOrder.sprov != null">
+				sprov = #{workOrder.sprov,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.city != null">
-				city = #{workOrder.city,jdbcType=VARCHAR},
+			<if test="workOrder.scity != null">
+				scity = #{workOrder.scity,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.country != null">
-				country = #{workOrder.country,jdbcType=VARCHAR},
+			<if test="workOrder.scountry != null">
+				scountry = #{workOrder.scountry,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.address != null">
-				address = #{workOrder.address,jdbcType=VARCHAR},
+			<if test="workOrder.saddress != null">
+				saddress = #{workOrder.saddress,jdbcType=VARCHAR},
 			</if>
+			
+			<if test="workOrder.rname != null">
+				rname = #{workOrder.rname,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rpostCode != null">
+				rpostCode = #{workOrder.rpostCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rphone != null">
+				rphone = #{workOrder.rphone,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rmobile != null">
+				rmobile = #{workOrder.rmobile,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rprov != null">
+				rprov = #{workOrder.rprov,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rcity != null">
+				rcity = #{workOrder.rcity,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.rcountry != null">
+				rcountry = #{workOrder.rcountry,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.raddress != null">
+				raddress = #{workOrder.raddress,jdbcType=VARCHAR},
+			</if>
+			
 			<if test="workOrder.sendStartTime != null">
 				sendStartTime = #{workOrder.sendStartTime,jdbcType=DATE},
 			</if>
@@ -548,12 +720,10 @@
 				remark = #{workOrder.remark,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.insuranceValue != null">
-				insuranceValue =
-				#{workOrder.insuranceValue,jdbcType=DOUBLE},
+				insuranceValue = #{workOrder.insuranceValue,jdbcType=DOUBLE},
 			</if>
 			<if test="workOrder.totalServiceFee != null">
-				totalServiceFee =
-				#{workOrder.totalServiceFee,jdbcType=DOUBLE},
+				totalServiceFee = #{workOrder.totalServiceFee,jdbcType=DOUBLE},
 			</if>
 			<if test="workOrder.codSplitFee != null">
 				codSplitFee = #{workOrder.codSplitFee,jdbcType=DOUBLE},
@@ -570,6 +740,24 @@
 			<if test="workOrder.upError != null">
 				upError = #{workOrder.upError,jdbcType=VARCHAR},
 			</if>
+			
+			<if test="workOrder.shortAddress != null">
+				shortAddress = #{workOrder.shortAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.consigneeBranchCode != null">
+				consigneeBranchCode = #{workOrder.consigneeBranchCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.packageCenterCode != null">
+				packageCenterCode = #{workOrder.packageCenterCode,jdbcType=VARCHAR},
+			</if>
+			<if test="workOrder.packageCenterName != null">
+				packageCenterName = #{workOrder.packageCenterName,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="workOrder.printStatus != null">
+				printStatus = #{workOrder.printStatus,jdbcType=INTEGER},
+			</if>
+			
 			<if test="workOrder.backTime != null">
 				backTime = #{workOrder.backTime,jdbcType=DATE},
 			</if>
@@ -594,8 +782,7 @@
 					and clientID = #{workOrderWhere.clientID,jdbcType=VARCHAR},
 				</if>
 				<if test="workOrderWhere.logisticProviderID != null">
-					and logisticProviderID =
-					#{workOrderWhere.logisticProviderID,jdbcType=VARCHAR},
+					and logisticProviderID = #{workOrderWhere.logisticProviderID,jdbcType=VARCHAR},
 				</if>
 				<if test="workOrderWhere.customerId != null">
 					and customerId = #{workOrderWhere.customerId,jdbcType=VARCHAR},
@@ -621,30 +808,57 @@
 				<if test="workOrderWhere.flag != null">
 					and flag = #{workOrderWhere.flag,jdbcType=INTEGER},
 				</if>
-				<if test="workOrderWhere.name != null">
-					and name = #{workOrderWhere.name,jdbcType=VARCHAR},
+				
+				<if test="workOrderWhere.sname != null">
+					and sname = #{workOrderWhere.sname,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.postCode != null">
-					and postCode = #{workOrderWhere.postCode,jdbcType=VARCHAR},
+				<if test="workOrderWhere.spostCode != null">
+					and spostCode = #{workOrderWhere.spostCode,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.phone != null">
-					and phone = #{workOrderWhere.phone,jdbcType=VARCHAR},
+				<if test="workOrderWhere.sphone != null">
+					and sphone = #{workOrderWhere.sphone,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.mobile != null">
-					mobile = #{workOrderWhere.mobile,jdbcType=VARCHAR},
+				<if test="workOrderWhere.smobile != null">
+					and smobile = #{workOrderWhere.smobile,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.prov != null">
-					and prov = #{workOrderWhere.prov,jdbcType=VARCHAR},
+				<if test="workOrderWhere.sprov != null">
+					and sprov = #{workOrderWhere.sprov,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.city != null">
-					and city = #{workOrderWhere.city,jdbcType=VARCHAR},
+				<if test="workOrderWhere.scity != null">
+					and scity = #{workOrderWhere.scity,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.country != null">
-					and country = #{workOrderWhere.country,jdbcType=VARCHAR},
+				<if test="workOrderWhere.scountry != null">
+					and scountry = #{workOrderWhere.scountry,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.address != null">
-					and address = #{workOrderWhere.address,jdbcType=VARCHAR},
+				<if test="workOrderWhere.saddress != null">
+					and saddress = #{workOrderWhere.saddress,jdbcType=VARCHAR},
 				</if>
+				
+				<if test="workOrderWhere.rname != null">
+					and rname = #{workOrderWhere.rname,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rpostCode != null">
+					and rpostCode = #{workOrderWhere.rpostCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rphone != null">
+					and rphone = #{workOrderWhere.rphone,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rmobile != null">
+					and rmobile = #{workOrderWhere.rmobile,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rprov != null">
+					and rprov = #{workOrderWhere.rprov,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rcity != null">
+					and rcity = #{workOrderWhere.rcity,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.rcountry != null">
+					and rcountry = #{workOrderWhere.rcountry,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.raddress != null">
+					and raddress = #{workOrderWhere.raddress,jdbcType=VARCHAR},
+				</if>	
+				
 				<if test="workOrderWhere.sendStartTime != null">
 					and sendStartTime = #{workOrderWhere.sendStartTime,jdbcType=DATE},
 				</if>
@@ -685,8 +899,7 @@
 					and insuranceValue = #{workOrderWhere.insuranceValue,jdbcType=DOUBLE},
 				</if>
 				<if test="workOrderWhere.totalServiceFee != null">
-					and totalServiceFee =
-					#{workOrderWhere.totalServiceFee,jdbcType=DOUBLE},
+					and totalServiceFee = #{workOrderWhere.totalServiceFee,jdbcType=DOUBLE},
 				</if>
 				<if test="workOrderWhere.codSplitFee != null">
 					and codSplitFee = #{workOrderWhere.codSplitFee,jdbcType=DOUBLE},
@@ -703,6 +916,24 @@
 				<if test="workOrderWhere.upError != null">
 					and upError = #{workOrderWhere.upError,jdbcType=VARCHAR},
 				</if>
+				
+				<if test="workOrderWhere.shortAddress != null">
+					and shortAddress = #{workOrderWhere.shortAddress,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.consigneeBranchCode != null">
+					and consigneeBranchCode = #{workOrderWhere.consigneeBranchCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.packageCenterCode != null">
+					and packageCenterCode = #{workOrderWhere.packageCenterCode,jdbcType=VARCHAR},
+				</if>
+				<if test="workOrderWhere.packageCenterName != null">
+					and packageCenterName = #{workOrderWhere.packageCenterName,jdbcType=VARCHAR},
+				</if>
+				
+				<if test="workOrderWhere.printStatus != null">
+					and printStatus = #{workOrderWhere.printStatus,jdbcType=INTEGER},
+				</if>
+				
 				<if test="workOrderWhere.backTime != null">
 					and backTime = #{workOrderWhere.backTime,jdbcType=DATE},
 				</if>
@@ -714,6 +945,5 @@
 				</if>
 			</where>
 		</if>
-
 	</update>
 </mapper>

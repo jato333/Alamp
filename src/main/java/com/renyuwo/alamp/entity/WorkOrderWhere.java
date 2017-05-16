@@ -63,42 +63,83 @@ private int id;
 	/*
 	 * 用户姓名
 	 */
-	private String name;
+	private String sname;
 	
 	/*
 	 * 用户邮编
 	 */
-	private String postCode;
+	private String spostCode;
 	
 	/*
 	 * 用户电话，包括区号、电话号码及分机号，中间用-分隔
 	 */
-	private String phone;
+	private String sphone;
 	
 	/*
 	 * 用户移动电话， 手机和电话至少填一项
 	 */
-	private String mobile;
+	private String smobile;
 	
 	/*
 	 * 用户所在省
 	 */
-	private String prov;
+	private String sprov;
 	
 	/*
 	 * 用户所在市县（区）
 	 */
-	private String city;
+	private String scity;
 	
 	/*
 	 * 
 	 */
-	private String country;
+	private String scountry;
 	
 	/*
 	 * 用户详细地址
 	 */
-	private String address;
+	private String saddress;
+	
+	
+	/*
+	 * 用户姓名
+	 */
+	private String rname;
+	
+	/*
+	 * 用户邮编
+	 */
+	private String rpostCode;
+	
+	/*
+	 * 用户电话，包括区号、电话号码及分机号，中间用-分隔
+	 */
+	private String rphone;
+	
+	/*
+	 * 用户移动电话， 手机和电话至少填一项
+	 */
+	private String rmobile;
+	
+	/*
+	 * 用户所在省
+	 */
+	private String rprov;
+	
+	/*
+	 * 用户所在市县（区）
+	 */
+	private String rcity;
+	
+	/*
+	 * 
+	 */
+	private String rcountry;
+	
+	/*
+	 * 用户详细地址
+	 */
+	private String raddress;
 	
 	/*
 	 * 物流公司上门取货时间段
@@ -188,6 +229,16 @@ private int id;
 	private int upStatus;
 	
 	private String upError;
+	
+	private String shortAddress;
+	
+	private String consigneeBranchCode;
+	
+	private String packageCenterCode;  
+	
+	private String packageCenterName;
+	
+	private int printStatus;
 	
 	private Date backTime;
 	
@@ -291,68 +342,133 @@ private int id;
 		this.flag = flag;
 	}
 
-	public String getName() {
-		return name;
+	
+	public String getSname() {
+		return sname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
 
-	public String getPostCode() {
-		return postCode;
+	public String getSpostCode() {
+		return spostCode;
 	}
 
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
+	public void setSpostCode(String spostCode) {
+		this.spostCode = spostCode;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getSphone() {
+		return sphone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setSphone(String sphone) {
+		this.sphone = sphone;
 	}
 
-	public String getMobile() {
-		return mobile;
+	public String getSmobile() {
+		return smobile;
 	}
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setSmobile(String smobile) {
+		this.smobile = smobile;
 	}
 
-	public String getProv() {
-		return prov;
+	public String getSprov() {
+		return sprov;
 	}
 
-	public void setProv(String prov) {
-		this.prov = prov;
+	public void setSprov(String sprov) {
+		this.sprov = sprov;
 	}
 
-	public String getCity() {
-		return city;
+	public String getScity() {
+		return scity;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setScity(String scity) {
+		this.scity = scity;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getScountry() {
+		return scountry;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setScountry(String scountry) {
+		this.scountry = scountry;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getSaddress() {
+		return saddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setSaddress(String saddress) {
+		this.saddress = saddress;
+	}
+
+	public String getRname() {
+		return rname;
+	}
+
+	public void setRname(String rname) {
+		this.rname = rname;
+	}
+
+	public String getRpostCode() {
+		return rpostCode;
+	}
+
+	public void setRpostCode(String rpostCode) {
+		this.rpostCode = rpostCode;
+	}
+
+	public String getRphone() {
+		return rphone;
+	}
+
+	public void setRphone(String rphone) {
+		this.rphone = rphone;
+	}
+
+	public String getRmobile() {
+		return rmobile;
+	}
+
+	public void setRmobile(String rmobile) {
+		this.rmobile = rmobile;
+	}
+
+	public String getRprov() {
+		return rprov;
+	}
+
+	public void setRprov(String rprov) {
+		this.rprov = rprov;
+	}
+
+	public String getRcity() {
+		return rcity;
+	}
+
+	public void setRcity(String rcity) {
+		this.rcity = rcity;
+	}
+
+	public String getRcountry() {
+		return rcountry;
+	}
+
+	public void setRcountry(String rcountry) {
+		this.rcountry = rcountry;
+	}
+
+	public String getRaddress() {
+		return raddress;
+	}
+
+	public void setRaddress(String raddress) {
+		this.raddress = raddress;
 	}
 
 	public String getSendStartTime() {
@@ -505,6 +621,46 @@ private int id;
 
 	public void setUpError(String upError) {
 		this.upError = upError;
+	}
+
+	public String getShortAddress() {
+		return shortAddress;
+	}
+
+	public void setShortAddress(String shortAddress) {
+		this.shortAddress = shortAddress;
+	}
+
+	public String getConsigneeBranchCode() {
+		return consigneeBranchCode;
+	}
+
+	public void setConsigneeBranchCode(String consigneeBranchCode) {
+		this.consigneeBranchCode = consigneeBranchCode;
+	}
+
+	public String getPackageCenterCode() {
+		return packageCenterCode;
+	}
+
+	public void setPackageCenterCode(String packageCenterCode) {
+		this.packageCenterCode = packageCenterCode;
+	}
+
+	public String getPackageCenterName() {
+		return packageCenterName;
+	}
+
+	public void setPackageCenterName(String packageCenterName) {
+		this.packageCenterName = packageCenterName;
+	}
+
+	public int getPrintStatus() {
+		return printStatus;
+	}
+
+	public void setPrintStatus(int printStatus) {
+		this.printStatus = printStatus;
 	}
 
 	public Date getBackTime() {
