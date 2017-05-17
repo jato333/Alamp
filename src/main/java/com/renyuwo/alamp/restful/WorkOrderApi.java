@@ -1,6 +1,7 @@
 package com.renyuwo.alamp.restful;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -24,30 +25,38 @@ public class WorkOrderApi {
 	WorkOrderService workOrderService;
 	
 	@RequestMapping(value = "/getworkorder")
-	public String getUser(
+	public String getWorkorder(
 			@RequestParam(value = "jsonwhere", required = true) String jsonwhere,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "pagesize", required = false, defaultValue = "10") int pagesize) {
+  
 		logger.info("Begin call getworkorder,params:");
 		logger.info("jsonwhere:"+jsonwhere);
-
+		
+	        
+	        
 		WorkOrderWhere workOrderWhere = JSON.parseObject(jsonwhere, WorkOrderWhere.class);
 		List<WorkOrder> WorkOrders = workOrderService.getWorkOrderBy(workOrderWhere, page, pagesize);
 		return JSONObject.toJSONString(WorkOrders);
 	}
 
 	@RequestMapping(value = "/addworkorder")
-	public int addUser(@RequestParam(value = "jsonstring", required = true) String jsonstring) throws UnsupportedEncodingException {
+	public int addWorkorder(@RequestParam(value = "jsonstring", required = true) String jsonstring) throws UnsupportedEncodingException {
 		logger.info("Begin call addworkorder,params:");
 		logger.info("jsonstring:"+jsonstring);
 		
-//		jsonstring= URLEncoder.encode(jsonstring, "GBK"); 
-		WorkOrder workOrder = JSON.parseObject(jsonstring, WorkOrder.class);
+		 Base64.Decoder urlDecoder = Base64.getUrlDecoder();  
+	     byte[] urlOutput = urlDecoder.decode(jsonstring);  
+	     String afterString=new String(urlOutput, "GBK");
+	     
+	     logger.info("url解码后:\n\t" + afterString);  
+	        
+		WorkOrder workOrder = JSON.parseObject(afterString, WorkOrder.class);
 		return workOrderService.insertWorkOrder(workOrder);
 	}
 
 	@RequestMapping(value = "/updateworkorder")
-	public int updateUser(
+	public int updateWorkorder(
 			@RequestParam(value = "jsonstring", required = true) String jsonstring,
 			@RequestParam(value = "jsonwhere", required = true) String jsonwhere) {
 		logger.info("Begin call updateworkorder,params:");
