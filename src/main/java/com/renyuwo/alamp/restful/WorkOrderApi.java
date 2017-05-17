@@ -2,7 +2,6 @@ package com.renyuwo.alamp.restful;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.renyuwo.alamp.entity.ResultMsg;
 import com.renyuwo.alamp.entity.WorkOrder;
 import com.renyuwo.alamp.entity.WorkOrderWhere;
 import com.renyuwo.alamp.service.WorkOrderService;
@@ -43,54 +43,91 @@ public class WorkOrderApi {
 	}
 
 	@RequestMapping(value = "/addworkorder")
-	public int addWorkorder(@RequestParam(value = "jsonstring", required = true) String jsonstring,
+	public String addWorkorder(@RequestParam(value = "jsonstring", required = true) String jsonstring,
 			@RequestParam(value = "jsonmd5", required = true) String jsonmd5) throws UnsupportedEncodingException {
 
-		logger.info("Begin call addworkorder,params:");
-		logger.info("jsonstring:" + jsonstring);
-		logger.info("jsonmd5:" + jsonmd5);
+		// url解码
+		String decodeString = "";
+		try {
+			Base64.Decoder urlDecoder = Base64.getUrlDecoder();
+			byte[] urlOutput = urlDecoder.decode(jsonstring);
+			decodeString = new String(urlOutput, "UTF-8");
+		} catch (Exception e) {
 
-		//url解码
-		Base64.Decoder urlDecoder = Base64.getUrlDecoder();
-		byte[] urlOutput = urlDecoder.decode(jsonstring);
-		String afterString = new String(urlOutput, "UTF-8");
-		logger.info("afterString:" + afterString);
-		
-		//DES解密
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E07");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("url解码失败");
+			resultMsg.setDetail(e.getMessage());
+			
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}
+
+		// DES解密
 		String dejsonstring = "";
 		try {
-			dejsonstring=DES.decrypt(afterString, DesSetting.DES_KEY);
+			dejsonstring = DES.decrypt(decodeString, DesSetting.DES_KEY);
 		} catch (Exception e) {
-			e.printStackTrace();
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E02");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("DES解密失败");
+			resultMsg.setDetail(e.getMessage());
+
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
-		logger.info("dejsonstring:" + dejsonstring);
-		
-		String desString="";
+
+		String desString = "";
+		Base64.Encoder urlEncoder = Base64.getUrlEncoder();
 		
 		try {
-			desString=DES.encrypt(dejsonstring, DesSetting.DES_KEY);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		Base64.Encoder urlEncoder = Base64.getUrlEncoder(); 
-		try {
+			desString = DES.encrypt(dejsonstring, DesSetting.DES_KEY);
+			
 			desString = urlEncoder.encodeToString(Encoder.EncoderByMd5(dejsonstring).getBytes("utf-8"));
-			logger.info("dejsonstring2:" + desString);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}  
-		
-		if(desString.equals(jsonmd5))
-		{
-			logger.info("true");
+			
+			if (!desString.equals(jsonmd5)) {
+				ResultMsg resultMsg = new ResultMsg();
+				resultMsg.setCode("E07");
+				resultMsg.setSuccess("N");
+				resultMsg.setMessage("数字签名不匹配");
+				resultMsg.setDetail("数字签名不匹配");
+
+				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			}
+			
+		} catch (Exception e) {
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E03");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("服务器验证密钥时发生异常");
+			resultMsg.setDetail(e.getMessage());
+
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
+
+		// 保存数据
+		decodeString = new StringBuffer(dejsonstring).reverse().toString();
+
+		WorkOrder workOrder = JSON.parseObject(decodeString, WorkOrder.class);
 		
-		//保存数据
-		afterString=new StringBuffer(dejsonstring).reverse().toString();
-		
-		WorkOrder workOrder = JSON.parseObject(afterString, WorkOrder.class);
-		return workOrderService.insertWorkOrder(workOrder);
+		if(workOrderService.insertWorkOrder(workOrder)==1)
+		{
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("200");
+			resultMsg.setSuccess("Y");
+			resultMsg.setMessage("保存成功");
+			resultMsg.setDetail("");
+
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}else{
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E09");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("数据保存异常");
+			resultMsg.setDetail("数据保存异常");
+
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}
 	}
 
 	@RequestMapping(value = "/updateworkorder")
