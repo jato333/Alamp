@@ -1,5 +1,6 @@
 package com.renyuwo.alamp.entity;
 
+//@XmlType(propOrder = {"name","postCode","phone","mobile","city"})
 public class sender {
 
 	private String name;
@@ -14,7 +15,7 @@ public class sender {
 
 	private String city;
 
-	private String country;
+//	private String country;
 
 	private String address;
 
@@ -66,13 +67,13 @@ public class sender {
 		this.city = city;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
+//	public String getCountry() {
+//		return country;
+//	}
+//
+//	public void setCountry(String country) {
+//		this.country = country;
+//	}
 
 	public String getAddress() {
 		return address;

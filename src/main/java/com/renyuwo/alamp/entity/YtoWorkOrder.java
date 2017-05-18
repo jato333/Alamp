@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="RequestOrder")
 public class YtoWorkOrder {
+
 	private String clientID;
 
 	private String logisticProviderID;
@@ -37,9 +38,9 @@ public class YtoWorkOrder {
 	private double goodsValue;
 
 	private double totalValue;
-
+	
 	private double agencyFund;
-
+	
 	private double itemsValue;
 
 	private double itemsWeight;

@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
 	        ResultMsg resultMsg=new ResultMsg();
 	        resultMsg.setCode("E01");
 	        resultMsg.setSuccess("N");
-	        resultMsg.setMessage("订单报文不合法");
+	        resultMsg.setMessage("报文不合法");
 	        resultMsg.setDetail(e.getMessage());
 	        
 	        return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8"); 

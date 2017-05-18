@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.renyuwo.alamp.dao.WorkOrderDao;
+import com.renyuwo.alamp.entity.UpdateWorkOrderStatus;
 import com.renyuwo.alamp.entity.WorkOrder;
 import com.renyuwo.alamp.entity.WorkOrderWhere;
 
@@ -15,6 +16,10 @@ public class WorkOrderService {
 	@Autowired
 	WorkOrderDao workOrderDao;
 
+	public List<WorkOrder> selectWorkOrderForUp(int upStatus, int page, int pagesize) {
+		return workOrderDao.selectWorkOrderForUp(upStatus, (page - 1) * pagesize, pagesize);
+	}
+	
 	public List<WorkOrder> getWorkOrderBy(WorkOrderWhere workOrderWhere, int page, int pagesize) {
 		return workOrderDao.selectWorkOrder(workOrderWhere, (page - 1) * pagesize, pagesize);
 	}
@@ -27,4 +32,7 @@ public class WorkOrderService {
 		return workOrderDao.updateWorkOrder(workOrder, workOrderWhere);
 	}
 
+	public int updateWorkOrderByID(UpdateWorkOrderStatus updateWorkOrderStatus) {
+		return workOrderDao.updateWorkOrderByID(updateWorkOrderStatus);
+	}
 }
