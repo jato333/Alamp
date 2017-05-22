@@ -1,6 +1,5 @@
 package com.renyuwo.alamp.entity;
 
-//@XmlType(propOrder = {"name","postCode","phone","mobile","city"})
 public class receiver {
 	private String name;
 

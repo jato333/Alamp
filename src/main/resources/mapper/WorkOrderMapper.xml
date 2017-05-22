@@ -767,4 +767,47 @@
 			</where>
 		</if>
 	</update>
+	
+	<update id="updateWorkOrderByID" parameterType="map">
+	update WorkOrder
+		<set>
+			<if test="updateWorkOrderStatus.txLogisticID != null">
+				txLogisticID = #{updateWorkOrderStatus.txLogisticID,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.logisticProviderID != null">
+				logisticProviderID = #{updateWorkOrderStatus.logisticProviderID,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.mailNo != null">
+				mailNo = #{updateWorkOrderStatus.mailNo,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.shortAddress != null">
+				shortAddress = #{updateWorkOrderStatus.shortAddress,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.consigneeBranchCode != null">
+				consigneeBranchCode = #{updateWorkOrderStatus.consigneeBranchCode,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.packageCenterCode != null">
+				packageCenterCode = #{updateWorkOrderStatus.packageCenterCode,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.packageCenterName != null">
+				packageCenterName = #{updateWorkOrderStatus.packageCenterName,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.upStatus != null">
+				upStatus = #{updateWorkOrderStatus.upStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		<where>
+			1=1
+			<if test="updateWorkOrderStatus.id != null">
+				and id = #{updateWorkOrderStatus.id,jdbcType=INTEGER}
+			</if>
+		</where>
+	</update>
 </mapper>

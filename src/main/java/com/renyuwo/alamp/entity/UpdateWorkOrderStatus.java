@@ -1,5 +1,7 @@
 package com.renyuwo.alamp.entity;
 
+import java.util.Date;
+
 public class UpdateWorkOrderStatus {
 	
 	private int id;
@@ -23,6 +25,10 @@ public class UpdateWorkOrderStatus {
 	private String packageCenterCode;
 	
 	private String packageCenterName;
+	
+	private int upStatus;
+	
+	private Date upTime;
 
 	public int getId() {
 		return id;
@@ -110,6 +116,22 @@ public class UpdateWorkOrderStatus {
 
 	public void setPackageCenterName(String packageCenterName) {
 		this.packageCenterName = packageCenterName;
+	}
+
+	public int getUpStatus() {
+		return upStatus;
+	}
+
+	public void setUpStatus(int upStatus) {
+		this.upStatus = upStatus;
+	}
+
+	public Date getUpTime() {
+		return upTime;
+	}
+
+	public void setUpTime(Date upTime) {
+		this.upTime = upTime;
 	}
 	
 	

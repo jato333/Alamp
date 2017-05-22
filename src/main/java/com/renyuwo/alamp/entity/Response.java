@@ -1,5 +1,7 @@
 package com.renyuwo.alamp.entity;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Response")
@@ -17,7 +19,22 @@ public class Response {
 
 	private String mailNo;
 		
-	private distributeInfo distributeInfo;
+	private distributeInfo distributeInfo;	
+	
+//	<Response>
+//	<logisticProviderID>YTO</logisticProviderID>
+//	<txLogisticID>885030080842650752</txLogisticID>
+//	<clientID>K21000119</clientID>
+//	<mailNo>800141223448</mailNo>
+//	<distributeInfo>
+//	<shortAddress>100-100-501</shortAddress>
+//	<consigneeBranchCode>100010</consigneeBranchCode>
+//	<packageCenterCode>100901</packageCenterCode>
+//	<packageCenterName>北京转运中心</packageCenterName>
+//	</distributeInfo>
+//	<code>200</code>
+//	<success>true</success>
+//	</Response>
 	
 	public String getTxLogisticID() {
 		return txLogisticID;
@@ -64,4 +81,5 @@ public class Response {
 	public String getSuccess() {
 		return success;
 	}
+
 }

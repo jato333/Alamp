@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.renyuwo.alamp.entity.Response;
+import com.renyuwo.alamp.entity.UpdateWorkOrderStatus;
 import com.renyuwo.alamp.entity.WorkOrder;
 import com.renyuwo.alamp.entity.WorkOrderWhere;
 import com.renyuwo.alamp.entity.YtoWorkOrder;
@@ -40,8 +41,8 @@ public class ScheduledTasks {
 	WorkOrderService workOrderService;
 	
 	//用于设置任务间隔
-	@Scheduled(cron="0/15 * * * * *")
-	public void doSomething() throws ParseException, UnsupportedEncodingException {
+	@Scheduled(cron="0/20 * * * * *")
+	public void doSomething() throws ParseException, UnsupportedEncodingException, InterruptedException, NoSuchAlgorithmException {
 		int page=1;
 		int pagesize=10;
 		
@@ -62,6 +63,8 @@ public class ScheduledTasks {
 			logger.info("即将处理"+workOrderL.size()+"条数据");
 			
 			for (WorkOrder workOrder : workOrderL) {
+				
+				logger.info("开始处理ID为:"+workOrder.getId()+"的数据..........");
 				YtoWorkOrder ytoWorkOrder=new YtoWorkOrder();
 				
 				ytoWorkOrder.setClientID(DataTrans.E_ClientId);
@@ -71,7 +74,14 @@ public class ScheduledTasks {
 				ytoWorkOrder.setType(workOrder.getType());
 				ytoWorkOrder.setOrderType(1);
 				ytoWorkOrder.setServiceType(1);
-				ytoWorkOrder.setFlag(0);
+				ytoWorkOrder.setFlag(1);
+				ytoWorkOrder.setTradeNo("1");
+				Date now = new Date(); 
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				String noewString = dateFormat.format( now ); 
+				ytoWorkOrder.setSendStartTime(noewString);
+				ytoWorkOrder.setSendEndTime(noewString);
+				
 				sender sender=new sender();
 				sender.setName(workOrder.getSname());
 				sender.setPostCode(workOrder.getSpostCode());
@@ -110,115 +120,89 @@ public class ScheduledTasks {
 				ytoWorkOrder.setSpecial(1);
 				ytoWorkOrder.setRemark(workOrder.getRemark());
 				
-				
-				
-//				YtoWorkOrder ytoWorkOrder=new YtoWorkOrder();
-//				
-//				ytoWorkOrder.setClientID(DataTrans.E_ClientId);
-//				ytoWorkOrder.setLogisticProviderID("YTO");
-//				ytoWorkOrder.setCustomerId(DataTrans.E_ClientId);
-//				ytoWorkOrder.setTxLogisticID("111111");
-//				ytoWorkOrder.setTradeNo("1");
-//				
-//				//ytoWorkOrder.setType(workOrder.getType());
-//				ytoWorkOrder.setTotalServiceFee(0.0);
-//				ytoWorkOrder.setCodSplitFee(0.0);
-//				
-//				ytoWorkOrder.setOrderType(1);
-//				ytoWorkOrder.setServiceType(1);
-//				ytoWorkOrder.setFlag(1);
-//				
-//				sender sender=new sender();
-//				sender.setName("寄件人姓名");
-//				sender.setPostCode("526238");
-//				sender.setPhone("021-12345678");
-//				sender.setMobile("18112345678");
-//				sender.setProv("上海");
-//				sender.setCity("上海,青浦区");
-//				sender.setAddress("华徐公路3029弄28号");	
-//				
-//				ytoWorkOrder.setSender(sender);
-//				
-//				receiver receiver=new receiver();
-//				receiver.setName("收件人姓名");
-//				receiver.setPostCode("0");
-//				receiver.setPhone("0");
-//				receiver.setMobile("18112345678");
-//				receiver.setProv("上海");
-//				receiver.setCity("上海,青浦区");
-//				receiver.setAddress("华徐公路3029弄28号");
-//				
-//				ytoWorkOrder.setReceiver(receiver);
-//				SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );
-//				ytoWorkOrder.setSendStartTime(sdf.parse("2015-12-12 12:12:12"));
-//				ytoWorkOrder.setSendEndTime(sdf.parse("2015-12-12 12:12:12"));
-//				ytoWorkOrder.setGoodsValue(1);
-//				
-//				List<item> itemL=new ArrayList<item>();
-//				item item=new item();
-//				item.setItemName("商品");
-//				item.setNumber(2);
-//				item.setItemValue(0);
-//				itemL.add(item);
-//				
-//				items items=new items();
-//				items.setItem(itemL);
-//				
-//				ytoWorkOrder.setItems(items);
-//				
-//				ytoWorkOrder.setInsuranceValue(1);
-//				ytoWorkOrder.setSpecial(1);
-//				ytoWorkOrder.setRemark("1");
-				
-				String datastr ="";	
+				StringBuilder datastr =new StringBuilder();
 				try {
-					datastr =  DataConvert.beanToXml(ytoWorkOrder, YtoWorkOrder.class);
+					datastr.append(DataConvert.beanToXml(ytoWorkOrder, YtoWorkOrder.class).toString());
 				} catch (JAXBException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				logger.info("传送数据："+datastr);
+				logger.info("待签名数据："+datastr.toString());
 				
-				String data_digest= datastr + DataTrans.E_PartnerID;
+				StringBuilder data_digest= new StringBuilder();
 				
-				logger.info("待签名数据："+data_digest);
+				data_digest.append(datastr.toString() + DataTrans.E_PartnerID);
 				
-				String md5Str="";
-				try {
-					md5Str=Encoder.EncoderByMd5(data_digest);
-				} catch (NoSuchAlgorithmException e) {
-					e.printStackTrace();
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+				logger.info("待签名数据2："+data_digest.toString());
+				StringBuilder md5Str=new StringBuilder();
+				md5Str.append(Encoder.EncoderByMd5(data_digest.toString()));
+				
 
-				logger.info("签名后内容："+md5Str);
+				logger.info("签名后内容："+md5Str.toString());
+
+				StringBuilder newmd5Str =new StringBuilder();
 				
+				newmd5Str.append(URLEncoder.encode(md5Str.toString(),"utf-8"));
 				
-				 String newmd5Str = URLEncoder.encode(md5Str,"utf-8");
+				StringBuilder postPam=new StringBuilder();
 				
-				String postPam="logistics_interface="
-						+URLEncoder.encode(datastr,"utf-8")
+				postPam.append("logistics_interface="
+						+URLEncoder.encode(datastr.toString(),"utf-8")
 						+"&data_digest="
-						+URLEncoder.encode(newmd5Str,"utf-8")
-						+"&type=offline&clientId="+DataTrans.E_ClientId;
-				logger.info("提交参数："+postPam);
-				String s=HttpRequest.sendPost(DataTrans.E_URL,postPam);
-				logger.info("返回结果："+s);
+						+URLEncoder.encode(newmd5Str.toString(),"utf-8")
+						+"&type=offline&clientId="+DataTrans.E_ClientId);
+				StringBuilder responseString=new StringBuilder();
 				
+				responseString.append(HttpRequest.sendPost(DataTrans.E_URL,postPam.toString()));
+				logger.info("返回结果："+responseString);
 				Response response=null;
 				try {
-					response=DataConvert.xmlToBean(s, Response.class);
+					response=DataConvert.xmlToBean(responseString.toString(), Response.class);
 					
-					System.out.println(response.getCode());
+					if(response.getCode().equals("200") && response.getSuccess().toLowerCase().equals("true")){
+						UpdateWorkOrderStatus updateWorkOrderStatus=new UpdateWorkOrderStatus();
+						updateWorkOrderStatus.setId(workOrder.getId());
+						updateWorkOrderStatus.setMailNo(response.getMailNo());
+						updateWorkOrderStatus.setPackageCenterCode(response.getDistributeInfo().getPackageCenterCode());
+						updateWorkOrderStatus.setConsigneeBranchCode(response.getDistributeInfo().getConsigneeBranchCode());
+						updateWorkOrderStatus.setPackageCenterName(response.getDistributeInfo().getPackageCenterName());
+						updateWorkOrderStatus.setShortAddress(response.getDistributeInfo().getShortAddress());
+						updateWorkOrderStatus.setUpStatus(1);
+						updateWorkOrderStatus.setUpTime(new Date());
+						if(workOrderService.updateWorkOrderByID(updateWorkOrderStatus)>0)
+						{
+							logger.info(workOrder.getId()+"更新成功过！");
+						}else{
+							logger.error(workOrder.getId()+"更新成失败！");
+						}
+					}else{
+						UpdateWorkOrderStatus updateWorkOrderStatus=new UpdateWorkOrderStatus();
+						updateWorkOrderStatus.setId(workOrder.getId());
+						updateWorkOrderStatus.setMailNo(response.getMailNo());
+						updateWorkOrderStatus.setPackageCenterCode(response.getDistributeInfo().getPackageCenterCode());
+						updateWorkOrderStatus.setConsigneeBranchCode(response.getDistributeInfo().getConsigneeBranchCode());
+						updateWorkOrderStatus.setPackageCenterName(response.getDistributeInfo().getPackageCenterName());
+						updateWorkOrderStatus.setShortAddress(response.getDistributeInfo().getShortAddress());
+						updateWorkOrderStatus.setUpStatus(1);
+						updateWorkOrderStatus.setUpTime(new Date());
+						if(workOrderService.updateWorkOrderByID(updateWorkOrderStatus)>0)
+						{
+							logger.info(workOrder.getId()+"更新成功过！");
+						}else{
+							logger.error(workOrder.getId()+"更新成失败！");
+						}
+					}
 				} catch (JAXBException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+//					e.printStackTrace();
+					
+					logger.error(workOrder.getId()+"上传失败！");
 				}
+				
+				
+				Thread.sleep(1000);
 			}
 			
-			//String str =  beanToXml(workOrder, WorkOrder.class);
+			
 			
 		}else{
 			logger.info("无待要处理的数据");

@@ -31,19 +31,19 @@ public class YtoWorkOrder {
 	
 	private receiver receiver;
 
-	private Date sendStartTime;
+	private String sendStartTime;
 
-	private Date sendEndTime;
+	private String sendEndTime;
 
 	private double goodsValue;
 
-	private double totalValue;
+//	private double totalValue;
 	
-	private double agencyFund;
+//	private double agencyFund;
 	
-	private double itemsValue;
-
-	private double itemsWeight;
+//	private double itemsValue;
+//
+//	private double itemsWeight;
 
 	private items items;
 
@@ -153,19 +153,19 @@ public class YtoWorkOrder {
 		this.receiver = receiver;
 	}
 
-	public Date getSendStartTime() {
+	public String getSendStartTime() {
 		return sendStartTime;
 	}
 
-	public void setSendStartTime(Date sendStartTime) {
+	public void setSendStartTime(String sendStartTime) {
 		this.sendStartTime = sendStartTime;
 	}
 
-	public Date getSendEndTime() {
+	public String getSendEndTime() {
 		return sendEndTime;
 	}
 
-	public void setSendEndTime(Date sendEndTime) {
+	public void setSendEndTime(String sendEndTime) {
 		this.sendEndTime = sendEndTime;
 	}
 
@@ -177,37 +177,37 @@ public class YtoWorkOrder {
 		this.goodsValue = goodsValue;
 	}
 
-	public double getTotalValue() {
-		return totalValue;
-	}
+//	public double getTotalValue() {
+//		return totalValue;
+//	}
+//
+//	public void setTotalValue(double totalValue) {
+//		this.totalValue = totalValue;
+//	}
 
-	public void setTotalValue(double totalValue) {
-		this.totalValue = totalValue;
-	}
+//	public double getAgencyFund() {
+//		return agencyFund;
+//	}
+//
+//	public void setAgencyFund(double agencyFund) {
+//		this.agencyFund = agencyFund;
+//	}
 
-	public double getAgencyFund() {
-		return agencyFund;
-	}
-
-	public void setAgencyFund(double agencyFund) {
-		this.agencyFund = agencyFund;
-	}
-
-	public double getItemsValue() {
-		return itemsValue;
-	}
-
-	public void setItemsValue(double itemsValue) {
-		this.itemsValue = itemsValue;
-	}
-
-	public double getItemsWeight() {
-		return itemsWeight;
-	}
-
-	public void setItemsWeight(double itemsWeight) {
-		this.itemsWeight = itemsWeight;
-	}
+//	public double getItemsValue() {
+//		return itemsValue;
+//	}
+//
+//	public void setItemsValue(double itemsValue) {
+//		this.itemsValue = itemsValue;
+//	}
+//
+//	public double getItemsWeight() {
+//		return itemsWeight;
+//	}
+//
+//	public void setItemsWeight(double itemsWeight) {
+//		this.itemsWeight = itemsWeight;
+//	}
 
 	public items getItems() {
 		return items;

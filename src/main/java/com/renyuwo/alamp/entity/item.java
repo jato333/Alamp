@@ -1,8 +1,5 @@
 package com.renyuwo.alamp.entity;
 
-import javax.xml.bind.annotation.XmlType;
-
-@XmlType(propOrder = {"itemName","number","itemValue"})
 public class item {
 	private String itemName;
 
