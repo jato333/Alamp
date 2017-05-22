@@ -30,8 +30,8 @@
 		<result column="rcity" jdbcType="VARCHAR" property="rcity" />
 		<result column="rcountry" jdbcType="VARCHAR" property="rcountry" />
 		<result column="raddress" jdbcType="VARCHAR" property="raddress" />
-		<result column="sendStartTime" jdbcType="DATE" property="sendStartTime" />
-		<result column="sendEndTime" jdbcType="DATE" property="sendEndTime" />
+		<result column="sendStartTime" jdbcType="VARCHAR" property="sendStartTime" />
+		<result column="sendEndTime" jdbcType="VARCHAR" property="sendEndTime" />
 		<result column="goodsValue" jdbcType="DOUBLE" property="goodsValue" />
 		<result column="totalValue" jdbcType="DOUBLE" property="totalValue" />
 		<result column="agencyFund" jdbcType="DOUBLE" property="agencyFund" />
@@ -45,8 +45,8 @@
 		<result column="insuranceValue" jdbcType="DOUBLE" property="insuranceValue" />
 		<result column="totalServiceFee" jdbcType="DOUBLE" property="totalServiceFee" />
 		<result column="codSplitFee" jdbcType="DOUBLE" property="codSplitFee" />
-		<result column="reciveTime" jdbcType="DATE" property="reciveTime" />
-		<result column="upTime" jdbcType="DATE" property="upTime" />
+		<result column="reciveTime" jdbcType="VARCHAR" property="reciveTime" />
+		<result column="upTime" jdbcType="VARCHAR" property="upTime" />
 		<result column="upStatus" jdbcType="INTEGER" property="upStatus" />
 		<result column="upError" jdbcType="VARCHAR" property="upError" />
 		<result column="shortAddress" jdbcType="VARCHAR" property="shortAddress" />
@@ -54,7 +54,7 @@
 		<result column="packageCenterCode" jdbcType="VARCHAR" property="packageCenterCode" />
 		<result column="packageCenterName" jdbcType="VARCHAR" property="packageCenterName" />
 		<result column="printStatus" jdbcType="INTEGER" property="printStatus" />
-		<result column="backTime" jdbcType="DATE" property="backTime" />
+		<result column="backTime" jdbcType="VARCHAR" property="backTime" />
 		<result column="backError" jdbcType="VARCHAR" property="backError" />
 		<result column="backStatus" jdbcType="INTEGER" property="backStatus" />
 	</resultMap>
@@ -328,10 +328,10 @@
 			</if>
 			
 			<if test="workOrder.sendStartTime != null">
-				#{workOrder.sendStartTime,jdbcType=DATE},
+				#{workOrder.sendStartTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.sendEndTime != null">
-				#{workOrder.sendEndTime,jdbcType=DATE},
+				#{workOrder.sendEndTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.goodsValue != null">
 				#{workOrder.goodsValue,jdbcType=DOUBLE},
@@ -373,10 +373,10 @@
 				#{workOrder.codSplitFee,jdbcType=DOUBLE},
 			</if>
 			<if test="workOrder.reciveTime != null">
-				#{workOrder.reciveTime,jdbcType=DATE},
+				#{workOrder.reciveTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.upTime != null">
-				#{workOrder.upTime,jdbcType=DATE},
+				#{workOrder.upTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.upStatus != null">
 				#{workOrder.upStatus,jdbcType=INTEGER},
@@ -403,7 +403,7 @@
 			</if>
 				
 			<if test="workOrder.backTime != null">
-				#{workOrder.backTime,jdbcType=DATE},
+				#{workOrder.backTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.backError != null">
 				#{workOrder.backError,jdbcType=VARCHAR},
@@ -505,10 +505,10 @@
 			</if>
 			
 			<if test="workOrder.sendStartTime != null">
-				sendStartTime = #{workOrder.sendStartTime,jdbcType=DATE},
+				sendStartTime = #{workOrder.sendStartTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.sendEndTime != null">
-				sendEndTime = #{workOrder.sendEndTime,jdbcType=DATE},
+				sendEndTime = #{workOrder.sendEndTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.goodsValue != null">
 				goodsValue = #{workOrder.goodsValue,jdbcType=DOUBLE},
@@ -550,10 +550,10 @@
 				codSplitFee = #{workOrder.codSplitFee,jdbcType=DOUBLE},
 			</if>
 			<if test="workOrder.reciveTime != null">
-				reciveTime = #{workOrder.reciveTime,jdbcType=DATE},
+				reciveTime = #{workOrder.reciveTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.upTime != null">
-				upTime = #{workOrder.upTime,jdbcType=DATE},
+				upTime = #{workOrder.upTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.upStatus != null">
 				upStatus = #{workOrder.upStatus,jdbcType=INTEGER},
@@ -580,7 +580,7 @@
 			</if>
 			
 			<if test="workOrder.backTime != null">
-				backTime = #{workOrder.backTime,jdbcType=DATE},
+				backTime = #{workOrder.backTime,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.backError != null">
 				backError = #{workOrder.backError,jdbcType=VARCHAR},
@@ -681,10 +681,10 @@
 				</if>	
 				
 				<if test="workOrderWhere.sendStartTime != null">
-					and sendStartTime = #{workOrderWhere.sendStartTime,jdbcType=DATE},
+					and sendStartTime = #{workOrderWhere.sendStartTime,jdbcType=VARCHAR},
 				</if>
 				<if test="workOrderWhere.sendEndTime != null">
-					and sendEndTime = #{workOrderWhere.sendEndTime,jdbcType=DATE},
+					and sendEndTime = #{workOrderWhere.sendEndTime,jdbcType=VARCHAR},
 				</if>
 				<if test="workOrderWhere.goodsValue != null">
 					and goodsValue = #{workOrderWhere.goodsValue,jdbcType=DOUBLE},
@@ -726,10 +726,10 @@
 					and codSplitFee = #{workOrderWhere.codSplitFee,jdbcType=DOUBLE},
 				</if>
 				<if test="workOrderWhere.reciveTime != null">
-					and reciveTime = #{workOrderWhere.reciveTime,jdbcType=DATE},
+					and reciveTime = #{workOrderWhere.reciveTime,jdbcType=VARCHAR},
 				</if>
 				<if test="workOrderWhere.upTime != null">
-					and upTime = #{workOrderWhere.upTime,jdbcType=DATE},
+					and upTime = #{workOrderWhere.upTime,jdbcType=VARCHAR},
 				</if>
 				<if test="workOrderWhere.upStatus != null">
 					and upStatus = #{workOrderWhere.upStatus,jdbcType=INTEGER},
@@ -756,7 +756,7 @@
 				</if>
 				
 				<if test="workOrderWhere.backTime != null">
-					and backTime = #{workOrderWhere.backTime,jdbcType=DATE},
+					and backTime = #{workOrderWhere.backTime,jdbcType=VARCHAR},
 				</if>
 				<if test="workOrderWhere.backError != null">
 					and backError = #{workOrderWhere.backError,jdbcType=VARCHAR},

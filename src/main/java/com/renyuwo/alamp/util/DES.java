@@ -12,10 +12,10 @@ public class DES {
 	private final static String DES = "DES";
 	
 	public static String encrypt(String data, String key) throws Exception {
-    	Base64.Encoder urlEncoder = Base64.getUrlEncoder(); 
+		sun.misc.BASE64Encoder encoder=new sun.misc.BASE64Encoder();
         byte[] bt = encrypt(data.getBytes("UTF-8"), key.getBytes("UTF-8"));
-        String strs = urlEncoder.encodeToString(bt);
-        return strs;
+        String strs = encoder.encode(bt);
+        return new String(strs.getBytes("UTF-8"));
     }
  
     /**
@@ -30,8 +30,8 @@ public class DES {
         if (data == null)
             return null;
  
-        Base64.Decoder decoder = Base64.getUrlDecoder();
-        byte[] buf = decoder.decode(data);
+        sun.misc.BASE64Decoder dencoder=new sun.misc.BASE64Decoder();
+        byte[] buf = dencoder.decodeBuffer(data);
         byte[] bt = decrypt(buf,key.getBytes("UTF-8"));
         return new String(bt);
     }

@@ -142,14 +142,14 @@ public class WorkOrder {
 	private String raddress;
 	
 	/*
-	 * 物流公司上门取货时间段
+	 * 物流公司上门取货时间段Ｓｔｒｉｎｇ
 	 */
-	private Date sendStartTime;
+	private String sendStartTime;
 	
 	/*
 	 * 商品金额
 	 */
-	private Date sendEndTime;
+	private String sendEndTime;
 	
 	/*
 	 * 总服务费
@@ -219,12 +219,12 @@ public class WorkOrder {
 	/*
 	 * 接收时间
 	 */
-	private Date reciveTime;
+	private String reciveTime;
 	
 	/*
 	 * 提交时间
 	 */
-	private Date upTime;
+	private String upTime;
 	
 	private int upStatus;
 	
@@ -240,7 +240,7 @@ public class WorkOrder {
 	
 	private int printStatus;
 	
-	private Date backTime;
+	private String backTime;
 	
 	private String backError;
 	
@@ -470,19 +470,19 @@ public class WorkOrder {
 		this.raddress = raddress;
 	}
 
-	public Date getSendStartTime() {
+	public String getSendStartTime() {
 		return sendStartTime;
 	}
 
-	public void setSendStartTime(Date sendStartTime) {
+	public void setSendStartTime(String sendStartTime) {
 		this.sendStartTime = sendStartTime;
 	}
 
-	public Date getSendEndTime() {
+	public String getSendEndTime() {
 		return sendEndTime;
 	}
 
-	public void setSendEndTime(Date sendEndTime) {
+	public void setSendEndTime(String sendEndTime) {
 		this.sendEndTime = sendEndTime;
 	}
 
@@ -590,19 +590,19 @@ public class WorkOrder {
 		this.codSplitFee = codSplitFee;
 	}
 
-	public Date getReciveTime() {
+	public String getReciveTime() {
 		return reciveTime;
 	}
 
-	public void setReciveTime(Date reciveTime) {
+	public void setReciveTime(String reciveTime) {
 		this.reciveTime = reciveTime;
 	}
 
-	public Date getUpTime() {
+	public String getUpTime() {
 		return upTime;
 	}
 
-	public void setUpTime(Date upTime) {
+	public void setUpTime(String upTime) {
 		this.upTime = upTime;
 	}
 
@@ -664,11 +664,11 @@ public class WorkOrder {
 		this.printStatus = printStatus;
 	}
 
-	public Date getBackTime() {
+	public String getBackTime() {
 		return backTime;
 	}
 
-	public void setBackTime(Date backTime) {
+	public void setBackTime(String backTime) {
 		this.backTime = backTime;
 	}
 

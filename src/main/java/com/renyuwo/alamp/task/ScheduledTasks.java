@@ -33,7 +33,7 @@ import com.renyuwo.alamp.util.DataConvert;
 import com.renyuwo.alamp.util.Encoder;
 import com.renyuwo.alamp.util.HttpRequest;
 
-@Component
+//@Component
 public class ScheduledTasks {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -56,7 +56,7 @@ public class ScheduledTasks {
 		{
 			workOrderL=workOrderService.selectWorkOrderForUp(0, page, pagesize);
 		}catch(Exception e){
-			logger.error("报错了");
+			logger.error("获取代处理数据报错了");
 		}
 		
 		if(workOrderL.size()>0){

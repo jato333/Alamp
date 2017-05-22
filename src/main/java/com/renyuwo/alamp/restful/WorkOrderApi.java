@@ -1,6 +1,7 @@
 package com.renyuwo.alamp.restful;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.List;
@@ -46,27 +47,15 @@ public class WorkOrderApi {
 	public String addWorkorder(@RequestParam(value = "jsonstring", required = true) String jsonstring,
 			@RequestParam(value = "jsonmd5", required = true) String jsonmd5) throws UnsupportedEncodingException {
 
-		// url解码
+		logger.info(jsonstring);
+		logger.info(jsonmd5);
+		
 		String decodeString = "";
-		try {
-			Base64.Decoder urlDecoder = Base64.getUrlDecoder();
-			byte[] urlOutput = urlDecoder.decode(jsonstring);
-			decodeString = new String(urlOutput, "UTF-8");
-		} catch (Exception e) {
-
-			ResultMsg resultMsg = new ResultMsg();
-			resultMsg.setCode("E07");
-			resultMsg.setSuccess("N");
-			resultMsg.setMessage("url解码失败");
-			resultMsg.setDetail(e.getMessage());
-			
-			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
-		}
-
+		
 		// DES解密
 		String dejsonstring = "";
 		try {
-			dejsonstring = DES.decrypt(decodeString, DesSetting.DES_KEY);
+			dejsonstring = DES.decrypt(jsonstring, DesSetting.DES_KEY);
 		} catch (Exception e) {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E02");
@@ -77,14 +66,15 @@ public class WorkOrderApi {
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
 
+		logger.info("dejsonstring:"+dejsonstring);
+		
 		String desString = "";
-		Base64.Encoder urlEncoder = Base64.getUrlEncoder();
 		
 		try {
 			desString = DES.encrypt(dejsonstring, DesSetting.DES_KEY);
 			
-			desString = urlEncoder.encodeToString(Encoder.EncoderByMd5(dejsonstring).getBytes("utf-8"));
-			
+			desString = Encoder.EncoderByMd5(dejsonstring);
+			logger.info("MD5加密"+desString);
 			if (!desString.equals(jsonmd5)) {
 				ResultMsg resultMsg = new ResultMsg();
 				resultMsg.setCode("E07");

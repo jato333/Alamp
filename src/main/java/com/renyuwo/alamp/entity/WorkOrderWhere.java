@@ -219,12 +219,12 @@ private int id;
 	/*
 	 * 接收时间
 	 */
-	private Date reciveTime;
+	private String reciveTime;
 	
 	/*
 	 * 提交时间
 	 */
-	private Date upTime;
+	private String upTime;
 	
 	private int upStatus;
 	
@@ -240,7 +240,7 @@ private int id;
 	
 	private int printStatus;
 	
-	private Date backTime;
+	private String backTime;
 	
 	private String backError;
 	
@@ -591,19 +591,19 @@ private int id;
 		this.codSplitFee = codSplitFee;
 	}
 
-	public Date getReciveTime() {
+	public String getReciveTime() {
 		return reciveTime;
 	}
 
-	public void setReciveTime(Date reciveTime) {
+	public void setReciveTime(String reciveTime) {
 		this.reciveTime = reciveTime;
 	}
 
-	public Date getUpTime() {
+	public String getUpTime() {
 		return upTime;
 	}
 
-	public void setUpTime(Date upTime) {
+	public void setUpTime(String upTime) {
 		this.upTime = upTime;
 	}
 
@@ -663,11 +663,11 @@ private int id;
 		this.printStatus = printStatus;
 	}
 
-	public Date getBackTime() {
+	public String getBackTime() {
 		return backTime;
 	}
 
-	public void setBackTime(Date backTime) {
+	public void setBackTime(String backTime) {
 		this.backTime = backTime;
 	}
 
