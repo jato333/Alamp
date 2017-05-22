@@ -10,10 +10,6 @@
 		<result column="txLogisticID" jdbcType="VARCHAR" property="txLogisticID" />
 		<result column="tradeNo" jdbcType="VARCHAR" property="tradeNo" />
 		<result column="mailNo" jdbcType="VARCHAR" property="mailNo" />
-		<result column="type" jdbcType="INTEGER" property="type" />
-		<result column="orderType" jdbcType="INTEGER" property="orderType" />
-		<result column="serviceType" jdbcType="INTEGER" property="serviceType" />
-		<result column="flag" jdbcType="INTEGER" property="flag" />
 		<result column="sname" jdbcType="VARCHAR" property="sname" />
 		<result column="spostCode" jdbcType="VARCHAR" property="spostCode" />
 		<result column="sphone" jdbcType="VARCHAR" property="sphone" />
@@ -90,20 +86,7 @@
 			</if>
 			<if test="workOrder.mailNo != null">
 				mailNo,
-			</if>
-			<if test="workOrder.type != null">
-				type,
-			</if>
-			<if test="workOrder.orderType != null">
-				orderType,
-			</if>
-			<if test="workOrder.serviceType != null">
-				serviceType,
-			</if>
-			<if test="workOrder.flag != null">
-				flag,
-			</if>
-			
+			</if>		
 			<if test="workOrder.sname != null">
 				sname,
 			</if>
@@ -228,7 +211,6 @@
 			<if test="workOrder.printStatus != null">
 				printStatus,
 			</if>
-			
 			<if test="workOrder.backTime != null">
 				backTime,
 			</if>
@@ -263,20 +245,7 @@
 			</if>
 			<if test="workOrder.mailNo != null">
 				#{workOrder.mailNo,jdbcType=VARCHAR},
-			</if>
-			<if test="workOrder.type != null">
-				#{workOrder.type,jdbcType=INTEGER},
-			</if>
-			<if test="workOrder.orderType != null">
-				#{workOrder.orderType,jdbcType=INTEGER},
-			</if>
-			<if test="workOrder.serviceType != null">
-				#{workOrder.serviceType,jdbcType=INTEGER},
-			</if>
-			<if test="workOrder.flag != null">
-				#{workOrder.flag,jdbcType=INTEGER},
-			</if>
-			
+			</if>			
 			<if test="workOrder.sname != null">
 				#{workOrder.sname,jdbcType=VARCHAR},
 			</if>
@@ -441,19 +410,6 @@
 			<if test="workOrder.mailNo != null">
 				mailNo = #{workOrder.mailNo,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.type != null">
-				type = #{workOrder.type,jdbcType=INTEGER},
-			</if>
-			<if test="workOrder.orderType != null">
-				orderType = #{workOrder.orderType,jdbcType=INTEGER},
-			</if>
-			<if test="workOrder.serviceType != null">
-				serviceType = #{workOrder.serviceType,jdbcType=INTEGER},
-			</if>
-			<if test="workOrder.flag != null">
-				flag = #{workOrder.flag,jdbcType=INTEGER},
-			</if>
-			
 			<if test="workOrder.sname != null">
 				sname = #{workOrder.sname,jdbcType=VARCHAR},
 			</if>
@@ -617,19 +573,6 @@
 				<if test="workOrderWhere.mailNo != null">
 					and mailNo = #{workOrderWhere.mailNo,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.type != null">
-					and type = #{workOrderWhere.type,jdbcType=INTEGER},
-				</if>
-				<if test="workOrderWhere.orderType != null">
-					orderType = #{workOrderWhere.orderType,jdbcType=INTEGER},
-				</if>
-				<if test="workOrderWhere.serviceType != null">
-					and serviceType = #{workOrderWhere.serviceType,jdbcType=INTEGER},
-				</if>
-				<if test="workOrderWhere.flag != null">
-					and flag = #{workOrderWhere.flag,jdbcType=INTEGER},
-				</if>
-				
 				<if test="workOrderWhere.sname != null">
 					and sname = #{workOrderWhere.sname,jdbcType=VARCHAR},
 				</if>
@@ -797,6 +740,10 @@
 			
 			<if test="updateWorkOrderStatus.packageCenterName != null">
 				packageCenterName = #{updateWorkOrderStatus.packageCenterName,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.upTime != null">
+				upTime = #{updateWorkOrderStatus.upTime,jdbcType=INTEGER},
 			</if>
 			
 			<if test="updateWorkOrderStatus.upStatus != null">

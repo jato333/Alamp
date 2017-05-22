@@ -8,22 +8,11 @@ private int id;
 	/*
 	 * 公司名称
 	 */
-	private String companyName;
-	
-	/*
-	 * 商家代码
-	 */
-	private String clientID;
-	
+	private String companyName;	
 	/*
 	 * 物流公司ID
 	 */
 	private String logisticProviderID;
-	
-	/*
-	 * 商家代码
-	 */
-	private String customerId;
 	
 	/*
 	 * 物流订单号
@@ -39,26 +28,6 @@ private int id;
 	 * 物流运单号
 	 */
 	private String mailNo;
-	
-	/*
-	 *订单类型
-	 */
-	private int type;
-	
-	/*
-	 * 订单类型(0-COD,1-普通订单,2-便携式订单3-退货单)
-	 */
-	private int orderType;
-	
-	/*
-	 * 服务类型
-	 */
-	private int serviceType;
-	
-	/*
-	 * 订单flag标识，默认为 0，暂无意义
-	 */
-	private int flag;
 	
 	/*
 	 * 用户姓名
@@ -262,28 +231,12 @@ private int id;
 		this.companyName = companyName;
 	}
 
-	public String getClientID() {
-		return clientID;
-	}
-
-	public void setClientID(String clientID) {
-		this.clientID = clientID;
-	}
-
 	public String getLogisticProviderID() {
 		return logisticProviderID;
 	}
 
 	public void setLogisticProviderID(String logisticProviderID) {
 		this.logisticProviderID = logisticProviderID;
-	}
-
-	public String getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
 	}
 
 	public String getTxLogisticID() {
@@ -309,39 +262,6 @@ private int id;
 	public void setMailNo(String mailNo) {
 		this.mailNo = mailNo;
 	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public int getOrderType() {
-		return orderType;
-	}
-
-	public void setOrderType(int orderType) {
-		this.orderType = orderType;
-	}
-
-	public int getServiceType() {
-		return serviceType;
-	}
-
-	public void setServiceType(int serviceType) {
-		this.serviceType = serviceType;
-	}
-
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
-
 	
 	public String getSname() {
 		return sname;

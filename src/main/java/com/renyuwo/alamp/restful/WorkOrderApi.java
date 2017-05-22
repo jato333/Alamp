@@ -46,9 +46,6 @@ public class WorkOrderApi {
 	@RequestMapping(value = "/addworkorder")
 	public String addWorkorder(@RequestParam(value = "jsonstring", required = true) String jsonstring,
 			@RequestParam(value = "jsonmd5", required = true) String jsonmd5) throws UnsupportedEncodingException {
-
-//		logger.info(jsonstring);
-//		logger.info(jsonmd5);
 		
 		String decodeString = "";
 		
@@ -65,8 +62,6 @@ public class WorkOrderApi {
 
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
-
-//		logger.info("dejsonstring:"+dejsonstring);
 		
 		String desString = "";
 		
@@ -74,7 +69,6 @@ public class WorkOrderApi {
 			desString = DES.encrypt(dejsonstring, DesSetting.DES_KEY);
 			
 			desString = Encoder.EncoderByMd5(dejsonstring);
-//			logger.info("MD5加密"+desString);
 			if (!desString.equals(jsonmd5)) {
 				ResultMsg resultMsg = new ResultMsg();
 				resultMsg.setCode("E07");
@@ -99,7 +93,7 @@ public class WorkOrderApi {
 		decodeString = new StringBuffer(dejsonstring).reverse().toString();
 
 		WorkOrder workOrder = JSON.parseObject(decodeString, WorkOrder.class);
-		
+		workOrder.setLogisticProviderID("YTO");
 		if(workOrderService.insertWorkOrder(workOrder)==1)
 		{
 			ResultMsg resultMsg = new ResultMsg();

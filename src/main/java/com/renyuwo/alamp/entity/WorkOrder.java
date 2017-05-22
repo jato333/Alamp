@@ -41,26 +41,6 @@ public class WorkOrder {
 	private String mailNo;
 	
 	/*
-	 *订单类型
-	 */
-	private int type;
-	
-	/*
-	 * 订单类型(0-COD,1-普通订单,2-便携式订单3-退货单)
-	 */
-	private int orderType;
-	
-	/*
-	 * 服务类型
-	 */
-	private int serviceType;
-	
-	/*
-	 * 订单flag标识，默认为 0，暂无意义
-	 */
-	private int flag;
-	
-	/*
 	 * 用户姓名
 	 */
 	private String sname;
@@ -308,38 +288,6 @@ public class WorkOrder {
 
 	public void setMailNo(String mailNo) {
 		this.mailNo = mailNo;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public int getOrderType() {
-		return orderType;
-	}
-
-	public void setOrderType(int orderType) {
-		this.orderType = orderType;
-	}
-
-	public int getServiceType() {
-		return serviceType;
-	}
-
-	public void setServiceType(int serviceType) {
-		this.serviceType = serviceType;
-	}
-
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag(int flag) {
-		this.flag = flag;
 	}
 
 	public String getSname() {

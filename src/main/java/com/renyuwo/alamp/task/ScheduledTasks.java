@@ -33,7 +33,7 @@ import com.renyuwo.alamp.util.DataConvert;
 import com.renyuwo.alamp.util.Encoder;
 import com.renyuwo.alamp.util.HttpRequest;
 
-//@Component
+@Component
 public class ScheduledTasks {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -41,10 +41,10 @@ public class ScheduledTasks {
 	WorkOrderService workOrderService;
 	
 	//用于设置任务间隔
-	@Scheduled(cron="0/20 * * * * *")
+	@Scheduled(cron="0/1 * * * * *")
 	public void doSomething() throws ParseException, UnsupportedEncodingException, InterruptedException, NoSuchAlgorithmException {
 		int page=1;
-		int pagesize=10;
+		int pagesize=5;
 		
 		WorkOrderWhere workOrderWhere=new WorkOrderWhere();
 		workOrderWhere.setUpStatus(0);
@@ -68,10 +68,10 @@ public class ScheduledTasks {
 				YtoWorkOrder ytoWorkOrder=new YtoWorkOrder();
 				
 				ytoWorkOrder.setClientID(DataTrans.E_ClientId);
-				ytoWorkOrder.setLogisticProviderID("YTO");
+				ytoWorkOrder.setLogisticProviderID(workOrder.getLogisticProviderID());
 				ytoWorkOrder.setCustomerId(DataTrans.E_ClientId);
 				ytoWorkOrder.setTxLogisticID(workOrder.getTxLogisticID());
-				ytoWorkOrder.setType(workOrder.getType());
+				ytoWorkOrder.setType(1);
 				ytoWorkOrder.setOrderType(1);
 				ytoWorkOrder.setServiceType(1);
 				ytoWorkOrder.setFlag(1);
@@ -127,18 +127,11 @@ public class ScheduledTasks {
 					e.printStackTrace();
 				}
 				
-				logger.info("待签名数据："+datastr.toString());
-				
 				StringBuilder data_digest= new StringBuilder();
-				
 				data_digest.append(datastr.toString() + DataTrans.E_PartnerID);
 				
-				logger.info("待签名数据2："+data_digest.toString());
 				StringBuilder md5Str=new StringBuilder();
 				md5Str.append(Encoder.EncoderByMd5(data_digest.toString()));
-				
-
-				logger.info("签名后内容："+md5Str.toString());
 
 				StringBuilder newmd5Str =new StringBuilder();
 				
@@ -168,7 +161,9 @@ public class ScheduledTasks {
 						updateWorkOrderStatus.setPackageCenterName(response.getDistributeInfo().getPackageCenterName());
 						updateWorkOrderStatus.setShortAddress(response.getDistributeInfo().getShortAddress());
 						updateWorkOrderStatus.setUpStatus(1);
-						updateWorkOrderStatus.setUpTime(new Date());
+						Date now1 = new Date(); 
+						SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						updateWorkOrderStatus.setUpTime(dateFormat.format( now1 ));
 						if(workOrderService.updateWorkOrderByID(updateWorkOrderStatus)>0)
 						{
 							logger.info(workOrder.getId()+"更新成功过！");
@@ -184,7 +179,9 @@ public class ScheduledTasks {
 						updateWorkOrderStatus.setPackageCenterName(response.getDistributeInfo().getPackageCenterName());
 						updateWorkOrderStatus.setShortAddress(response.getDistributeInfo().getShortAddress());
 						updateWorkOrderStatus.setUpStatus(1);
-						updateWorkOrderStatus.setUpTime(new Date());
+						Date now1 = new Date(); 
+						SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						updateWorkOrderStatus.setUpTime(dateFormat.format( now1 ));
 						if(workOrderService.updateWorkOrderByID(updateWorkOrderStatus)>0)
 						{
 							logger.info(workOrder.getId()+"更新成功过！");
@@ -193,17 +190,12 @@ public class ScheduledTasks {
 						}
 					}
 				} catch (JAXBException e) {
-//					e.printStackTrace();
 					
 					logger.error(workOrder.getId()+"上传失败！");
 				}
 				
-				
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			}
-			
-			
-			
 		}else{
 			logger.info("无待要处理的数据");
 		}

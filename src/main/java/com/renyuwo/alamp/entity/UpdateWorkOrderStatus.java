@@ -28,7 +28,7 @@ public class UpdateWorkOrderStatus {
 	
 	private int upStatus;
 	
-	private Date upTime;
+	private String upTime;
 
 	public int getId() {
 		return id;
@@ -126,11 +126,11 @@ public class UpdateWorkOrderStatus {
 		this.upStatus = upStatus;
 	}
 
-	public Date getUpTime() {
+	public String getUpTime() {
 		return upTime;
 	}
 
-	public void setUpTime(Date upTime) {
+	public void setUpTime(String upTime) {
 		this.upTime = upTime;
 	}
 	
