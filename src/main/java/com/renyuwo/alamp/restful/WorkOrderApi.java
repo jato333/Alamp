@@ -5,7 +5,6 @@ import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.renyuwo.alamp.entity.ResultMsg;
 import com.renyuwo.alamp.entity.WorkOrder;
-import com.renyuwo.alamp.entity.WorkOrderWhere;
 import com.renyuwo.alamp.service.WorkOrderService;
 import com.renyuwo.alamp.setting.DataTrans;
 import com.renyuwo.alamp.setting.DesSetting;
@@ -32,16 +29,6 @@ public class WorkOrderApi {
 
 	@Autowired
 	WorkOrderService workOrderService;
-
-	@RequestMapping(value = "/getworkorder")
-	public String getWorkorder(@RequestParam(value = "jsonwhere", required = true) String jsonwhere,
-			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "pagesize", required = false, defaultValue = "10") int pagesize) {
-
-		WorkOrderWhere workOrderWhere = JSON.parseObject(jsonwhere, WorkOrderWhere.class);
-		List<WorkOrder> WorkOrders = workOrderService.getWorkOrderBy(workOrderWhere, page, pagesize);
-		return JSONObject.toJSONString(WorkOrders);
-	}
 
 	@RequestMapping(value = "/addworkorder")
 	public String addWorkorder(@RequestParam(value = "jsonstring", required = true) String jsonstring,
@@ -111,17 +98,6 @@ public class WorkOrderApi {
 
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
-	}
-
-	@RequestMapping(value = "/updateworkorder")
-	public int updateWorkorder(@RequestParam(value = "jsonstring", required = true) String jsonstring,
-			@RequestParam(value = "jsonwhere", required = true) String jsonwhere) {
-		logger.info("Begin call updateworkorder,params:");
-		logger.info("jsonwhere:" + jsonwhere);
-		WorkOrder workOrder = JSON.parseObject(jsonstring, WorkOrder.class);
-		WorkOrderWhere workOrderWhere = JSON.parseObject(jsonwhere, WorkOrderWhere.class);
-
-		return workOrderService.updateWorkOrder(workOrder, workOrderWhere);
 	}
 
 	@RequestMapping(value = "/getworkorderstate")
