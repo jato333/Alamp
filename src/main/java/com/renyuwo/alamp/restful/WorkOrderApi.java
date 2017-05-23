@@ -145,7 +145,6 @@ public class WorkOrderApi {
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
 
-		
 		String decodeString = new StringBuffer(dejsonstring).reverse().toString();
 		StringBuilder datastr = new StringBuilder();
 
@@ -159,22 +158,38 @@ public class WorkOrderApi {
 		md5Str.append(Encoder.string2MD5(datastr.toString()));
 
 		StringBuilder parastr = new StringBuilder();
-		parastr.append("<?xml  version=\"1.0\"?><ufinterface><Result><WaybillCode><Number>" + decodeString+ "</Number></WaybillCode></Result></ufinterface>");
-		
+		parastr.append("<?xml  version=\"1.0\"?><ufinterface><Result><WaybillCode><Number>" + decodeString
+				+ "</Number></WaybillCode></Result></ufinterface>");
+
 		StringBuilder postPam = new StringBuilder();
-		postPam.append("sign=" + md5Str.toString().toUpperCase() + "&app_key=" + DataTrans.E_App_Key + "&format=XML" + "&method="
-				+ DataTrans.E_method + "&timestamp=" + formatTime + "&user_id=" + DataTrans.E_User_Id + "&v=1.01"
-				+ "&param=" + parastr.toString());
+		postPam.append("sign=" + md5Str.toString().toUpperCase() + "&app_key=" + DataTrans.E_App_Key + "&format=XML"
+				+ "&method=" + DataTrans.E_method + "&timestamp=" + formatTime + "&user_id=" + DataTrans.E_User_Id
+				+ "&v=1.01" + "&param=" + parastr.toString());
 		StringBuilder responseString = new StringBuilder();
 
-		responseString.append(HttpRequest.sendPost(DataTrans.E_Search_url, postPam.toString()));
+		try {
+			responseString.append(HttpRequest.sendPost(DataTrans.E_Search_url, postPam.toString()));
 
-		ResultMsg resultMsg = new ResultMsg();
-		resultMsg.setCode("200");
-		resultMsg.setSuccess("Y");
-		resultMsg.setMessage("查询结果");
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("200");
+			resultMsg.setSuccess("Y");
+			
+			if(responseString.indexOf("ufinterface")>0){
+				resultMsg.setMessage("有操作记录");
+			}else{
+				resultMsg.setMessage("无操作记录");
+			}
 
-		resultMsg.setDetail(responseString.toString());
-		return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			resultMsg.setDetail(responseString.toString());
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		} catch (Exception e) {
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E02");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("查询快递接口发生异常");
+
+			resultMsg.setDetail(e.getMessage());
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}
 	}
 }
