@@ -4,9 +4,7 @@
 	<resultMap id="BaseResultMap" type="com.renyuwo.alamp.entity.WorkOrder">
 		<result column="id" jdbcType="INTEGER" property="id" />
 		<result column="companyName" jdbcType="VARCHAR" property="companyName" />
-		<result column="clientID" jdbcType="VARCHAR" property="clientID" />
 		<result column="logisticProviderID" jdbcType="VARCHAR" property="logisticProviderID" />
-		<result column="customerId" jdbcType="VARCHAR" property="customerId" />
 		<result column="txLogisticID" jdbcType="VARCHAR" property="txLogisticID" />
 		<result column="tradeNo" jdbcType="VARCHAR" property="tradeNo" />
 		<result column="mailNo" jdbcType="VARCHAR" property="mailNo" />
@@ -50,9 +48,6 @@
 		<result column="packageCenterCode" jdbcType="VARCHAR" property="packageCenterCode" />
 		<result column="packageCenterName" jdbcType="VARCHAR" property="packageCenterName" />
 		<result column="printStatus" jdbcType="INTEGER" property="printStatus" />
-		<result column="backTime" jdbcType="VARCHAR" property="backTime" />
-		<result column="backError" jdbcType="VARCHAR" property="backError" />
-		<result column="backStatus" jdbcType="INTEGER" property="backStatus" />
 	</resultMap>
 
 	<select id="selectWorkOrderForUp" parameterType="map" resultMap="BaseResultMap">
@@ -69,14 +64,8 @@
 			<if test="workOrder.companyName!= null">
 				companyName,
 			</if>
-			<if test="workOrder.clientID != null">
-				clientID,
-			</if>
 			<if test="workOrder.logisticProviderID != null">
 				logisticProviderID,
-			</if>
-			<if test="workOrder.customerId != null">
-				customerId,
 			</if>
 			<if test="workOrder.txLogisticID != null">
 				txLogisticID,
@@ -211,15 +200,6 @@
 			<if test="workOrder.printStatus != null">
 				printStatus,
 			</if>
-			<if test="workOrder.backTime != null">
-				backTime,
-			</if>
-			<if test="workOrder.backError != null">
-				backError,
-			</if>
-			<if test="workOrder.backStatus != null">
-				backStatus,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="workOrder.id != null">
@@ -228,14 +208,8 @@
 			<if test="workOrder.companyName!= null">
 				#{workOrder.companyName,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.clientID != null">
-				#{workOrder.clientID,jdbcType=VARCHAR},
-			</if>
 			<if test="workOrder.logisticProviderID != null">
 				#{workOrder.logisticProviderID,jdbcType=VARCHAR},
-			</if>
-			<if test="workOrder.customerId != null">
-				#{workOrder.customerId,jdbcType=VARCHAR},
 			</if>
 			<if test="workOrder.txLogisticID != null">
 				#{workOrder.txLogisticID,jdbcType=VARCHAR},
@@ -370,16 +344,6 @@
 			<if test="workOrder.printStatus != null">
 				#{workOrder.printStatus,jdbcType=INTEGER},
 			</if>
-				
-			<if test="workOrder.backTime != null">
-				#{workOrder.backTime,jdbcType=VARCHAR},
-			</if>
-			<if test="workOrder.backError != null">
-				#{workOrder.backError,jdbcType=VARCHAR},
-			</if>
-			<if test="workOrder.backStatus != null">
-				#{workOrder.backStatus,jdbcType=INTEGER},
-			</if>
 		</trim>
 	</insert>
 
@@ -392,15 +356,11 @@
 			<if test="workOrder.companyName!= null">
 				companyName = #{workOrder.companyName,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.clientID != null">
-				clientID = #{workOrder.clientID,jdbcType=VARCHAR},
-			</if>
+
 			<if test="workOrder.logisticProviderID != null">
 				logisticProviderID = #{workOrder.logisticProviderID,jdbcType=VARCHAR},
 			</if>
-			<if test="workOrder.customerId != null">
-				customerId = #{workOrder.customerId,jdbcType=VARCHAR},
-			</if>
+
 			<if test="workOrder.txLogisticID != null">
 				txLogisticID = #{workOrder.txLogisticID,jdbcType=VARCHAR},
 			</if>
@@ -534,16 +494,6 @@
 			<if test="workOrder.printStatus != null">
 				printStatus = #{workOrder.printStatus,jdbcType=INTEGER},
 			</if>
-			
-			<if test="workOrder.backTime != null">
-				backTime = #{workOrder.backTime,jdbcType=VARCHAR},
-			</if>
-			<if test="workOrder.backError != null">
-				backError = #{workOrder.backError,jdbcType=VARCHAR},
-			</if>
-			<if test="workOrder.backStatus != null">
-				backStatus = #{workOrder.backStatus,jdbcType=INTEGER},
-			</if>
 		</set>
 		<if test="workOrderWhere != null">
 			<where>
@@ -555,15 +505,11 @@
 				<if test="workOrderWhere.companyName!= null">
 					and companyName = #{workOrderWhere.companyName,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.clientID != null">
-					and clientID = #{workOrderWhere.clientID,jdbcType=VARCHAR},
-				</if>
+
 				<if test="workOrderWhere.logisticProviderID != null">
 					and logisticProviderID = #{workOrderWhere.logisticProviderID,jdbcType=VARCHAR},
 				</if>
-				<if test="workOrderWhere.customerId != null">
-					and customerId = #{workOrderWhere.customerId,jdbcType=VARCHAR},
-				</if>
+
 				<if test="workOrderWhere.txLogisticID != null">
 					and txLogisticID = #{workOrderWhere.txLogisticID,jdbcType=VARCHAR},
 				</if>
@@ -696,16 +642,6 @@
 				
 				<if test="workOrderWhere.printStatus != null">
 					and printStatus = #{workOrderWhere.printStatus,jdbcType=INTEGER},
-				</if>
-				
-				<if test="workOrderWhere.backTime != null">
-					and backTime = #{workOrderWhere.backTime,jdbcType=VARCHAR},
-				</if>
-				<if test="workOrderWhere.backError != null">
-					and backError = #{workOrderWhere.backError,jdbcType=VARCHAR},
-				</if>
-				<if test="workOrderWhere.backStatus != null">
-					and backStatus = #{workOrderWhere.backStatus,jdbcType=INTEGER},
 				</if>
 			</where>
 		</if>

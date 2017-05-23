@@ -11,4 +11,17 @@ public class DataTrans {
 	
 	//接口名称 	ClientId 	PartnerID 	URL 
 	//订单测试接口 	TEST 	123456 	http://jingangtest.yto56.com.cn/ordws/Vip16Servlet 	
+	
+	
+//	接口类目 	User_Id 	App_Key 	Secret_Key
+//	服务类 	dianchuang 	kTMCwP 	eOVUQw
+//	接口名称 	方法名 	URL
+//	走件流程查询接口 	yto.Marketing.WaybillTrace 	http://MarketingInterface.yto.net.cn
+	
+	
+	public final static String E_User_Id="dianchuang";
+	public final static String E_App_Key="kTMCwP";
+	public final static String E_Secret_Key="eOVUQw";
+	public final static String E_method="yto.Marketing.WaybillTrace";
+	public final static String E_Search_url="http://MarketingInterface.yto.net.cn";
 }

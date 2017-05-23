@@ -11,20 +11,10 @@ public class WorkOrder {
 	private String companyName;
 	
 	/*
-	 * 商家代码
-	 */
-	private String clientID;
-	
-	/*
 	 * 物流公司ID
 	 */
 	private String logisticProviderID;
-	
-	/*
-	 * 商家代码
-	 */
-	private String customerId;
-	
+
 	/*
 	 * 物流订单号
 	 */
@@ -219,12 +209,6 @@ public class WorkOrder {
 	private String packageCenterName;
 	
 	private int printStatus;
-	
-	private String backTime;
-	
-	private String backError;
-	
-	private int backStatus;
 
 	public int getId() {
 		return id;
@@ -242,13 +226,6 @@ public class WorkOrder {
 		this.companyName = companyName;
 	}
 
-	public String getClientID() {
-		return clientID;
-	}
-
-	public void setClientID(String clientID) {
-		this.clientID = clientID;
-	}
 
 	public String getLogisticProviderID() {
 		return logisticProviderID;
@@ -256,14 +233,6 @@ public class WorkOrder {
 
 	public void setLogisticProviderID(String logisticProviderID) {
 		this.logisticProviderID = logisticProviderID;
-	}
-
-	public String getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
 	}
 
 	public String getTxLogisticID() {
@@ -611,29 +580,4 @@ public class WorkOrder {
 	public void setPrintStatus(int printStatus) {
 		this.printStatus = printStatus;
 	}
-
-	public String getBackTime() {
-		return backTime;
-	}
-
-	public void setBackTime(String backTime) {
-		this.backTime = backTime;
-	}
-
-	public String getBackError() {
-		return backError;
-	}
-
-	public void setBackError(String backError) {
-		this.backError = backError;
-	}
-
-	public int getBackStatus() {
-		return backStatus;
-	}
-
-	public void setBackStatus(int backStatus) {
-		this.backStatus = backStatus;
-	}
-
 }

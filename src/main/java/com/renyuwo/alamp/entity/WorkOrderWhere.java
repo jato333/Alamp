@@ -208,12 +208,6 @@ private int id;
 	private String packageCenterName;
 	
 	private int printStatus;
-	
-	private String backTime;
-	
-	private String backError;
-	
-	private int backStatus;
 
 	public int getId() {
 		return id;
@@ -583,30 +577,6 @@ private int id;
 		this.printStatus = printStatus;
 	}
 
-	public String getBackTime() {
-		return backTime;
-	}
-
-	public void setBackTime(String backTime) {
-		this.backTime = backTime;
-	}
-
-	public String getBackError() {
-		return backError;
-	}
-
-	public void setBackError(String backError) {
-		this.backError = backError;
-	}
-
-	public int getBackStatus() {
-		return backStatus;
-	}
-
-	public void setBackStatus(int backStatus) {
-		this.backStatus = backStatus;
-	}
-	
 	
 	
 }
