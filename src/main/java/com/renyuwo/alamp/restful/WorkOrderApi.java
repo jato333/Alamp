@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.renyuwo.alamp.entity.ResultMsg;
+import com.renyuwo.alamp.entity.SearchByCustCode;
 import com.renyuwo.alamp.entity.WorkOrder;
 import com.renyuwo.alamp.service.WorkOrderService;
 import com.renyuwo.alamp.setting.DataTrans;
@@ -79,8 +80,42 @@ public class WorkOrderApi {
 		// 保存数据
 		decodeString = new StringBuffer(dejsonstring).reverse().toString();
 
-		WorkOrder workOrder = JSON.parseObject(decodeString, WorkOrder.class);
+		
+		WorkOrder workOrder=null; 
+		try
+		{
+		workOrder= JSON.parseObject(decodeString, WorkOrder.class);
+		}catch (Exception e) {
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E06");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("解析异常");
+			resultMsg.setDetail("解析参数发生异常");
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}
+		
+		
+		try
+		{
+		java.util.List<WorkOrder> ml=workOrderService.selectWorkOrderByCustCode(workOrder.getTxLogisticID());
+		
+		if(ml!=null && ml.size()>0){
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E04");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("保存失败");
+			resultMsg.setDetail("订单号已存在");
+
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}
+
 		workOrder.setLogisticProviderID("YTO");
+
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		workOrder.setSendStartTime(sdf.format(now));
+		workOrder.setSendEndTime(sdf.format(now));
+
 		if (workOrderService.insertWorkOrder(workOrder) == 1) {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("200");
@@ -95,6 +130,15 @@ public class WorkOrderApi {
 			resultMsg.setSuccess("N");
 			resultMsg.setMessage("数据保存异常");
 			resultMsg.setDetail("数据保存异常");
+
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}
+		} catch (Exception e) {
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E10");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("保存失败");
+			resultMsg.setDetail("校验重复时发生异常");
 
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
@@ -145,7 +189,60 @@ public class WorkOrderApi {
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
 
-		String decodeString = new StringBuffer(dejsonstring).reverse().toString();
+		// 解析对象
+		String decodeStrings = new StringBuffer(dejsonstring).reverse().toString();
+		SearchByCustCode searchByCustCode=new SearchByCustCode();
+		
+		try{
+			searchByCustCode = JSON.parseObject(decodeStrings, SearchByCustCode.class);
+		}catch (Exception e) {
+			ResultMsg resultMsg = new ResultMsg();
+			resultMsg.setCode("E06");
+			resultMsg.setSuccess("N");
+			resultMsg.setMessage("解析异常");
+			resultMsg.setDetail("解析参数发生异常");
+			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+		}
+
+		// 判断单号类型
+		String decodeString = "";
+		if (searchByCustCode.getType() == 1) {
+			decodeString=searchByCustCode.getWorkCode();
+		} else {
+			
+			try
+			{
+			java.util.List<WorkOrder> ml=workOrderService.selectWorkOrderByCustCode(searchByCustCode.getWorkCode());
+			
+			if(ml!=null && ml.size()>0){
+				decodeString=ml.get(0).getMailNo();
+				
+				if(decodeString.trim().length()==0){
+					ResultMsg resultMsg = new ResultMsg();
+					resultMsg.setCode("E05");
+					resultMsg.setSuccess("N");
+					resultMsg.setMessage("无操作记录");
+					resultMsg.setDetail("客户订单编号不存在！");
+					return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+				}
+			}else{
+				ResultMsg resultMsg = new ResultMsg();
+				resultMsg.setCode("E05");
+				resultMsg.setSuccess("N");
+				resultMsg.setMessage("无操作记录");
+				resultMsg.setDetail("客户订单编号不存在！");
+				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			}
+			}catch (Exception e) {
+				ResultMsg resultMsg = new ResultMsg();
+				resultMsg.setCode("E11");
+				resultMsg.setSuccess("N");
+				resultMsg.setMessage("检索失败");
+				resultMsg.setDetail("获取快递单号时发生异常！");
+				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			}
+		}
+
 		StringBuilder datastr = new StringBuilder();
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -173,10 +270,10 @@ public class WorkOrderApi {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("200");
 			resultMsg.setSuccess("Y");
-			
-			if(responseString.indexOf("ufinterface")>0){
+
+			if (responseString.indexOf("ufinterface") > 0) {
 				resultMsg.setMessage("有操作记录");
-			}else{
+			} else {
 				resultMsg.setMessage("无操作记录");
 			}
 

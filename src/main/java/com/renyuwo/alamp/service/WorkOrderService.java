@@ -20,6 +20,10 @@ public class WorkOrderService {
 		return workOrderDao.selectWorkOrderForUp(upStatus, (page - 1) * pagesize, pagesize);
 	}
 	
+	public List<WorkOrder> selectWorkOrderByCustCode(String custCode) {
+		return workOrderDao.selectWorkOrderByCustCode(custCode);
+	}
+	
 	public List<WorkOrder> getWorkOrderBy(WorkOrderWhere workOrderWhere, int page, int pagesize) {
 		return workOrderDao.selectWorkOrder(workOrderWhere, (page - 1) * pagesize, pagesize);
 	}

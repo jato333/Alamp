@@ -13,6 +13,8 @@ import com.renyuwo.alamp.entity.WorkOrderWhere;
 public interface WorkOrderDao {
 	
 	public List<WorkOrder> selectWorkOrderForUp(@Param("upStatus") int upStatus, @Param("startsize") int page,@Param("pagesize") int pagesize);
+	
+	public List<WorkOrder> selectWorkOrderByCustCode(@Param("custCode") String custCode);
 
 	public List<WorkOrder> selectWorkOrder(@Param("workOrderWhere") WorkOrderWhere workOrderWhere, @Param("startsize") int page,@Param("pagesize") int pagesize);
 	

@@ -55,6 +55,11 @@
 		limit #{startsize,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
 	</select>
 
+	<select id="selectWorkOrderByCustCode" parameterType="map" resultMap="BaseResultMap">
+		select * from WorkOrder where txLogisticID = #{custCode,jdbcType=VARCHAR}
+		limit 1,1
+	</select>
+	
 	<insert id="insertWorkOrder" parameterType="map">
 		insert into WorkOrder
 		<trim prefix="(" suffix=")" suffixOverrides=",">
