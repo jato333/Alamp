@@ -56,8 +56,7 @@
 	</select>
 
 	<select id="selectWorkOrderByCustCode" parameterType="map" resultMap="BaseResultMap">
-		select * from WorkOrder where txLogisticID = #{custCode,jdbcType=VARCHAR}
-		limit 1,1
+		select * from WorkOrder where txLogisticID = #{custCode,jdbcType=VARCHAR} limit 1
 	</select>
 	
 	<insert id="insertWorkOrder" parameterType="map">

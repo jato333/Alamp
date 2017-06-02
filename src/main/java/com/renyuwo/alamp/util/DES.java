@@ -13,9 +13,9 @@ public class DES {
 	
 	public static String encrypt(String data, String key) throws Exception {
 		sun.misc.BASE64Encoder encoder=new sun.misc.BASE64Encoder();
-        byte[] bt = encrypt(data.getBytes("UTF-8"), key.getBytes("UTF-8"));
+        byte[] bt = encrypt(data.getBytes("GBK"), key.getBytes("GBK"));
         String strs = encoder.encode(bt);
-        return new String(strs.getBytes("UTF-8"));
+        return new String(strs.getBytes("GBK"));
     }
  
     /**
@@ -32,7 +32,7 @@ public class DES {
  
         sun.misc.BASE64Decoder dencoder=new sun.misc.BASE64Decoder();
         byte[] buf = dencoder.decodeBuffer(data);
-        byte[] bt = decrypt(buf,key.getBytes("UTF-8"));
+        byte[] bt = decrypt(buf,key.getBytes("GBK"));
         return new String(bt);
     }
  

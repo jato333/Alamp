@@ -30,7 +30,7 @@ import com.renyuwo.alamp.entity.sender;
 import com.renyuwo.alamp.service.WorkOrderService;
 import com.renyuwo.alamp.setting.DataTrans;
 import com.renyuwo.alamp.util.DataConvert;
-import com.renyuwo.alamp.util.Encoder;
+import com.renyuwo.alamp.util.Encoder2;
 import com.renyuwo.alamp.util.HttpRequest;
 
 @Component
@@ -50,7 +50,7 @@ public class ScheduledTasks {
 		workOrderWhere.setUpStatus(0);
 		List<WorkOrder> workOrderL=new ArrayList<WorkOrder>();
 		
-		logger.info(JSON.toJSONString(workOrderWhere));
+//		logger.info(JSON.toJSONString(workOrderWhere));
 		
 		try
 		{
@@ -131,7 +131,7 @@ public class ScheduledTasks {
 				data_digest.append(datastr.toString() + DataTrans.E_PartnerID);
 				
 				StringBuilder md5Str=new StringBuilder();
-				md5Str.append(Encoder.EncoderByMd5(data_digest.toString()));
+				md5Str.append(Encoder2.EncoderByMd5(data_digest.toString()));
 
 				StringBuilder newmd5Str =new StringBuilder();
 				

@@ -80,12 +80,10 @@ public class WorkOrderApi {
 		// 保存数据
 		decodeString = new StringBuffer(dejsonstring).reverse().toString();
 
-		
-		WorkOrder workOrder=null; 
-		try
-		{
-		workOrder= JSON.parseObject(decodeString, WorkOrder.class);
-		}catch (Exception e) {
+		WorkOrder workOrder = null;
+		try {
+			workOrder = JSON.parseObject(decodeString, WorkOrder.class);
+		} catch (Exception e) {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E06");
 			resultMsg.setSuccess("N");
@@ -93,46 +91,45 @@ public class WorkOrderApi {
 			resultMsg.setDetail("解析参数发生异常");
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 		}
-		
-		
-		try
-		{
-		java.util.List<WorkOrder> ml=workOrderService.selectWorkOrderByCustCode(workOrder.getTxLogisticID());
-		
-		if(ml!=null && ml.size()>0){
-			ResultMsg resultMsg = new ResultMsg();
-			resultMsg.setCode("E04");
-			resultMsg.setSuccess("N");
-			resultMsg.setMessage("保存失败");
-			resultMsg.setDetail("订单号已存在");
 
-			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
-		}
+		try {
+			java.util.List<WorkOrder> ml = workOrderService.selectWorkOrderByCustCode(workOrder.getTxLogisticID());
 
-		workOrder.setLogisticProviderID("YTO");
+			if (ml != null && ml.size() > 0) {
+				ResultMsg resultMsg = new ResultMsg();
+				resultMsg.setCode("E04");
+				resultMsg.setSuccess("N");
+				resultMsg.setMessage("保存失败");
+				resultMsg.setDetail("订单号已存在");
 
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		workOrder.setSendStartTime(sdf.format(now));
-		workOrder.setSendEndTime(sdf.format(now));
+				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			}
 
-		if (workOrderService.insertWorkOrder(workOrder) == 1) {
-			ResultMsg resultMsg = new ResultMsg();
-			resultMsg.setCode("200");
-			resultMsg.setSuccess("Y");
-			resultMsg.setMessage("保存成功");
-			resultMsg.setDetail("");
+			workOrder.setLogisticProviderID("YTO");
 
-			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
-		} else {
-			ResultMsg resultMsg = new ResultMsg();
-			resultMsg.setCode("E09");
-			resultMsg.setSuccess("N");
-			resultMsg.setMessage("数据保存异常");
-			resultMsg.setDetail("数据保存异常");
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			workOrder.setSendStartTime(sdf.format(now));
+			workOrder.setSendEndTime(sdf.format(now));
+			workOrder.setReciveTime(sdf.format(now));
 
-			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
-		}
+			if (workOrderService.insertWorkOrder(workOrder) == 1) {
+				ResultMsg resultMsg = new ResultMsg();
+				resultMsg.setCode("200");
+				resultMsg.setSuccess("Y");
+				resultMsg.setMessage("保存成功");
+				resultMsg.setDetail("");
+
+				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			} else {
+				ResultMsg resultMsg = new ResultMsg();
+				resultMsg.setCode("E09");
+				resultMsg.setSuccess("N");
+				resultMsg.setMessage("数据保存异常");
+				resultMsg.setDetail("数据保存异常");
+
+				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			}
 		} catch (Exception e) {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E10");
@@ -191,11 +188,11 @@ public class WorkOrderApi {
 
 		// 解析对象
 		String decodeStrings = new StringBuffer(dejsonstring).reverse().toString();
-		SearchByCustCode searchByCustCode=new SearchByCustCode();
-		
-		try{
+		SearchByCustCode searchByCustCode = new SearchByCustCode();
+
+		try {
 			searchByCustCode = JSON.parseObject(decodeStrings, SearchByCustCode.class);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E06");
 			resultMsg.setSuccess("N");
@@ -207,17 +204,25 @@ public class WorkOrderApi {
 		// 判断单号类型
 		String decodeString = "";
 		if (searchByCustCode.getType() == 1) {
-			decodeString=searchByCustCode.getWorkCode();
+			decodeString = searchByCustCode.getWorkCode();
 		} else {
-			
-			try
-			{
-			java.util.List<WorkOrder> ml=workOrderService.selectWorkOrderByCustCode(searchByCustCode.getWorkCode());
-			
-			if(ml!=null && ml.size()>0){
-				decodeString=ml.get(0).getMailNo();
-				
-				if(decodeString.trim().length()==0){
+
+			try {
+				java.util.List<WorkOrder> ml = workOrderService
+						.selectWorkOrderByCustCode(searchByCustCode.getWorkCode());
+
+				if (ml != null && ml.size() > 0) {
+					decodeString = ml.get(0).getMailNo();
+
+					if (decodeString.trim().length() == 0) {
+						ResultMsg resultMsg = new ResultMsg();
+						resultMsg.setCode("E05");
+						resultMsg.setSuccess("N");
+						resultMsg.setMessage("无操作记录");
+						resultMsg.setDetail("客户订单编号不存在！");
+						return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+					}
+				} else {
 					ResultMsg resultMsg = new ResultMsg();
 					resultMsg.setCode("E05");
 					resultMsg.setSuccess("N");
@@ -225,15 +230,7 @@ public class WorkOrderApi {
 					resultMsg.setDetail("客户订单编号不存在！");
 					return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 				}
-			}else{
-				ResultMsg resultMsg = new ResultMsg();
-				resultMsg.setCode("E05");
-				resultMsg.setSuccess("N");
-				resultMsg.setMessage("无操作记录");
-				resultMsg.setDetail("客户订单编号不存在！");
-				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
-			}
-			}catch (Exception e) {
+			} catch (Exception e) {
 				ResultMsg resultMsg = new ResultMsg();
 				resultMsg.setCode("E11");
 				resultMsg.setSuccess("N");

@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Encoder {
+public class Encoder2 {
 	/**
 	 * 利用MD5进行加密
 	 * 
@@ -14,7 +14,7 @@ public class Encoder {
 	public static String EncoderByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		// 确定计算方法
 		MessageDigest md5 = MessageDigest.getInstance("MD5");
-		byte[] input = str.getBytes("GBK");
+		byte[] input = str.getBytes("utf-8");
 
 		// 加密后的字符串
 		sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
