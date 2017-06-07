@@ -154,6 +154,7 @@ public class WorkOrderApi {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E02");
 			resultMsg.setSuccess("N");
+			resultMsg.setTransname("");
 			resultMsg.setMessage("DES解密失败");
 			resultMsg.setDetail(e.getMessage());
 
@@ -170,6 +171,7 @@ public class WorkOrderApi {
 				ResultMsg resultMsg = new ResultMsg();
 				resultMsg.setCode("E07");
 				resultMsg.setSuccess("N");
+				resultMsg.setTransname("");
 				resultMsg.setMessage("数字签名不匹配");
 				resultMsg.setDetail("数字签名不匹配");
 
@@ -180,6 +182,7 @@ public class WorkOrderApi {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E03");
 			resultMsg.setSuccess("N");
+			resultMsg.setTransname("");
 			resultMsg.setMessage("服务器验证密钥时发生异常");
 			resultMsg.setDetail(e.getMessage());
 
@@ -196,6 +199,7 @@ public class WorkOrderApi {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E06");
 			resultMsg.setSuccess("N");
+			resultMsg.setTransname("");
 			resultMsg.setMessage("解析异常");
 			resultMsg.setDetail("解析参数发生异常");
 			return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
@@ -203,6 +207,7 @@ public class WorkOrderApi {
 
 		// 判断单号类型
 		String decodeString = "";
+		
 		if (searchByCustCode.getType() == 1) {
 			decodeString = searchByCustCode.getWorkCode();
 		} else {
@@ -218,6 +223,7 @@ public class WorkOrderApi {
 						ResultMsg resultMsg = new ResultMsg();
 						resultMsg.setCode("E05");
 						resultMsg.setSuccess("N");
+						resultMsg.setTransname("");
 						resultMsg.setMessage("无操作记录");
 						resultMsg.setDetail("客户订单编号不存在！");
 						return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
@@ -226,6 +232,7 @@ public class WorkOrderApi {
 					ResultMsg resultMsg = new ResultMsg();
 					resultMsg.setCode("E05");
 					resultMsg.setSuccess("N");
+					resultMsg.setTransname("");
 					resultMsg.setMessage("无操作记录");
 					resultMsg.setDetail("客户订单编号不存在！");
 					return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
@@ -234,6 +241,7 @@ public class WorkOrderApi {
 				ResultMsg resultMsg = new ResultMsg();
 				resultMsg.setCode("E11");
 				resultMsg.setSuccess("N");
+				resultMsg.setTransname("");
 				resultMsg.setMessage("检索失败");
 				resultMsg.setDetail("获取快递单号时发生异常！");
 				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
@@ -267,7 +275,8 @@ public class WorkOrderApi {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("200");
 			resultMsg.setSuccess("Y");
-
+			resultMsg.setTransname("圆通速递");
+			
 			if (responseString.indexOf("ufinterface") > 0) {
 				resultMsg.setMessage("有操作记录");
 			} else {
@@ -280,6 +289,7 @@ public class WorkOrderApi {
 			ResultMsg resultMsg = new ResultMsg();
 			resultMsg.setCode("E02");
 			resultMsg.setSuccess("N");
+			resultMsg.setTransname("");
 			resultMsg.setMessage("查询快递接口发生异常");
 
 			resultMsg.setDetail(e.getMessage());

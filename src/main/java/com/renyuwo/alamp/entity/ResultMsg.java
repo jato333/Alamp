@@ -14,9 +14,12 @@ public class ResultMsg {
 	private String success;
 	
 	@JSONField(ordinal=3)
-	private String message;
+	private String transname;
 	
 	@JSONField(ordinal=4)
+	private String message;
+	
+	@JSONField(ordinal=5)
 	private String detail;
 	
 
@@ -50,5 +53,13 @@ public class ResultMsg {
 
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+
+	public String getTransname() {
+		return transname;
+	}
+
+	public void setTransname(String transname) {
+		this.transname = transname;
 	}
 }

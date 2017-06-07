@@ -144,9 +144,14 @@ public class ScheduledTasks {
 						+"&data_digest="
 						+URLEncoder.encode(newmd5Str.toString(),"utf-8")
 						+"&type=offline&clientId="+DataTrans.E_ClientId);
+				
 				StringBuilder responseString=new StringBuilder();
 				
+				logger.info("报文内容："+postPam.toString());
+				
 				responseString.append(HttpRequest.sendPost(DataTrans.E_URL,postPam.toString()));
+				
+				
 				logger.info("返回结果："+responseString);
 				Response response=null;
 				try {
