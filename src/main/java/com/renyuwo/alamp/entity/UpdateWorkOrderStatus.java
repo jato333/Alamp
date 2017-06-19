@@ -14,7 +14,7 @@ public class UpdateWorkOrderStatus {
 	
 	private String success;
 	
-	private String reason;
+	private String upError;
 
 	private String mailNo;
 		
@@ -70,12 +70,12 @@ public class UpdateWorkOrderStatus {
 		this.success = success;
 	}
 
-	public String getReason() {
-		return reason;
+	public String getUpError() {
+		return upError;
 	}
 
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setUpError(String upError) {
+		this.upError = upError;
 	}
 
 	public String getMailNo() {

@@ -21,6 +21,7 @@ public class WorkOrderService {
 	}
 	
 	public List<WorkOrder> selectWorkOrderByCustCode(String custCode) {
+		System.out.println("custCode:"+custCode);
 		return workOrderDao.selectWorkOrderByCustCode(custCode);
 	}
 	

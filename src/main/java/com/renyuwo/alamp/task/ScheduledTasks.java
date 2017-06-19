@@ -171,11 +171,11 @@ public class ScheduledTasks {
 							logger.error(workOrder.getId() + "更新成失败！");
 						}
 					} else {
-						if (response.getCode().equals("503") && response.getSuccess().toLowerCase().equals("false")) {
+//						if (response.getSuccess().toLowerCase().equals("false")) {
 							UpdateWorkOrderStatus updateWorkOrderStatus = new UpdateWorkOrderStatus();
 							updateWorkOrderStatus.setId(workOrder.getId());
-							updateWorkOrderStatus.setReason("面单号段已不足！");
-							updateWorkOrderStatus.setUpStatus(0);
+							updateWorkOrderStatus.setUpError(response.getReason());
+							updateWorkOrderStatus.setUpStatus(-1);
 							Date now1 = new Date();
 							SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 							updateWorkOrderStatus.setUpTime(dateFormat.format(now1));
@@ -184,27 +184,27 @@ public class ScheduledTasks {
 							} else {
 								logger.error(workOrder.getId() + "更新成失败！");
 							}
-						} else {
-							UpdateWorkOrderStatus updateWorkOrderStatus = new UpdateWorkOrderStatus();
-							updateWorkOrderStatus.setId(workOrder.getId());
-							updateWorkOrderStatus.setMailNo(response.getMailNo());
-							updateWorkOrderStatus
-									.setPackageCenterCode(response.getDistributeInfo().getPackageCenterCode());
-							updateWorkOrderStatus
-									.setConsigneeBranchCode(response.getDistributeInfo().getConsigneeBranchCode());
-							updateWorkOrderStatus
-									.setPackageCenterName(response.getDistributeInfo().getPackageCenterName());
-							updateWorkOrderStatus.setShortAddress(response.getDistributeInfo().getShortAddress());
-							updateWorkOrderStatus.setUpStatus(1);
-							Date now1 = new Date();
-							SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-							updateWorkOrderStatus.setUpTime(dateFormat.format(now1));
-							if (workOrderService.updateWorkOrderByID(updateWorkOrderStatus) > 0) {
-								logger.info(workOrder.getId() + "更新成功过！");
-							} else {
-								logger.error(workOrder.getId() + "更新成失败！");
-							}
-						}
+//						} else {
+//							UpdateWorkOrderStatus updateWorkOrderStatus = new UpdateWorkOrderStatus();
+//							updateWorkOrderStatus.setId(workOrder.getId());
+//							updateWorkOrderStatus.setMailNo(response.getMailNo());
+//							updateWorkOrderStatus
+//									.setPackageCenterCode(response.getDistributeInfo().getPackageCenterCode());
+//							updateWorkOrderStatus
+//									.setConsigneeBranchCode(response.getDistributeInfo().getConsigneeBranchCode());
+//							updateWorkOrderStatus
+//									.setPackageCenterName(response.getDistributeInfo().getPackageCenterName());
+//							updateWorkOrderStatus.setShortAddress(response.getDistributeInfo().getShortAddress());
+//							updateWorkOrderStatus.setUpStatus(-1);
+//							Date now1 = new Date();
+//							SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//							updateWorkOrderStatus.setUpTime(dateFormat.format(now1));
+//							if (workOrderService.updateWorkOrderByID(updateWorkOrderStatus) > 0) {
+//								logger.info(workOrder.getId() + "更新成功过！");
+//							} else {
+//								logger.error(workOrder.getId() + "更新成失败！");
+//							}
+//						}
 					}
 				} catch (JAXBException e) {
 

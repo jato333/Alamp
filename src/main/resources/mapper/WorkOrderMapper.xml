@@ -683,7 +683,11 @@
 			</if>
 			
 			<if test="updateWorkOrderStatus.upTime != null">
-				upTime = #{updateWorkOrderStatus.upTime,jdbcType=INTEGER},
+				upTime = #{updateWorkOrderStatus.upTime,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="updateWorkOrderStatus.upError != null">
+				upError = #{updateWorkOrderStatus.upError,jdbcType=VARCHAR},
 			</if>
 			
 			<if test="updateWorkOrderStatus.upStatus != null">

@@ -207,36 +207,13 @@ public class WorkOrderApi {
 
 		// 判断单号类型
 		String decodeString = "";
-		
+
 		if (searchByCustCode.getType() == 1) {
 			decodeString = searchByCustCode.getWorkCode();
 		} else {
-
+			java.util.List<WorkOrder> ml = null;
 			try {
-				java.util.List<WorkOrder> ml = workOrderService
-						.selectWorkOrderByCustCode(searchByCustCode.getWorkCode());
-
-				if (ml != null && ml.size() > 0) {
-					decodeString = ml.get(0).getMailNo();
-
-					if (decodeString.trim().length() == 0) {
-						ResultMsg resultMsg = new ResultMsg();
-						resultMsg.setCode("E05");
-						resultMsg.setSuccess("N");
-						resultMsg.setTransname("");
-						resultMsg.setMessage("无操作记录");
-						resultMsg.setDetail("客户订单编号不存在！");
-						return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
-					}
-				} else {
-					ResultMsg resultMsg = new ResultMsg();
-					resultMsg.setCode("E05");
-					resultMsg.setSuccess("N");
-					resultMsg.setTransname("");
-					resultMsg.setMessage("无操作记录");
-					resultMsg.setDetail("客户订单编号不存在！");
-					return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
-				}
+				ml = workOrderService.selectWorkOrderByCustCode(searchByCustCode.getWorkCode());
 			} catch (Exception e) {
 				ResultMsg resultMsg = new ResultMsg();
 				resultMsg.setCode("E11");
@@ -244,6 +221,28 @@ public class WorkOrderApi {
 				resultMsg.setTransname("");
 				resultMsg.setMessage("检索失败");
 				resultMsg.setDetail("获取快递单号时发生异常！");
+				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+			}
+
+			if (ml != null && ml.size() > 0) {
+				decodeString = ml.get(0).getMailNo()==null?"":ml.get(0).getMailNo();
+
+				if (decodeString.trim().length() == 0) {
+					ResultMsg resultMsg = new ResultMsg();
+					resultMsg.setCode("E05");
+					resultMsg.setSuccess("N");
+					resultMsg.setTransname("");
+					resultMsg.setMessage("无操作记录");
+					resultMsg.setDetail("通过客户订单号未找到相应的快递单号，有可能还未进行相应操作，请稍候再试！");
+					return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
+				}
+			} else {
+				ResultMsg resultMsg = new ResultMsg();
+				resultMsg.setCode("E05");
+				resultMsg.setSuccess("N");
+				resultMsg.setTransname("");
+				resultMsg.setMessage("无操作记录");
+				resultMsg.setDetail("客户订单编号不存在！");
 				return URLEncoder.encode(JSON.toJSONString(resultMsg), "UTF-8");
 			}
 		}
@@ -276,7 +275,7 @@ public class WorkOrderApi {
 			resultMsg.setCode("200");
 			resultMsg.setSuccess("Y");
 			resultMsg.setTransname("圆通速递");
-			
+
 			if (responseString.indexOf("ufinterface") > 0) {
 				resultMsg.setMessage("有操作记录");
 			} else {
