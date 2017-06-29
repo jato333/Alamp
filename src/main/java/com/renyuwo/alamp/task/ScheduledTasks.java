@@ -41,15 +41,15 @@ public class ScheduledTasks {
 	WorkOrderService workOrderService;
 
 	// 用于设置任务间隔
-	@Scheduled(cron = "0/1 * * * * *")
+	@Scheduled(cron = "0/5 * * * * *")
 	public void doSomething()
 			throws ParseException, UnsupportedEncodingException, InterruptedException, NoSuchAlgorithmException {
 		int page = 1;
-		int pagesize = 5;
+		int pagesize = 1;
 
 		WorkOrderWhere workOrderWhere = new WorkOrderWhere();
 		workOrderWhere.setUpStatus(0);
-		List<WorkOrder> workOrderL = new ArrayList<WorkOrder>();
+		List<WorkOrder> workOrderL=null ;
 
 		try {
 			workOrderL = workOrderService.selectWorkOrderForUp(0, page, pagesize);
@@ -57,6 +57,8 @@ public class ScheduledTasks {
 			logger.error("获取代处理数据报错了");
 		}
 
+		logger.info("workOrderL.size的数值为："+workOrderL.size());
+		
 		if (workOrderL.size() > 0) {
 			logger.info("即将处理" + workOrderL.size() + "条数据");
 
@@ -171,7 +173,6 @@ public class ScheduledTasks {
 							logger.error(workOrder.getId() + "更新成失败！");
 						}
 					} else {
-//						if (response.getSuccess().toLowerCase().equals("false")) {
 							UpdateWorkOrderStatus updateWorkOrderStatus = new UpdateWorkOrderStatus();
 							updateWorkOrderStatus.setId(workOrder.getId());
 							updateWorkOrderStatus.setUpError(response.getReason());
@@ -184,27 +185,6 @@ public class ScheduledTasks {
 							} else {
 								logger.error(workOrder.getId() + "更新成失败！");
 							}
-//						} else {
-//							UpdateWorkOrderStatus updateWorkOrderStatus = new UpdateWorkOrderStatus();
-//							updateWorkOrderStatus.setId(workOrder.getId());
-//							updateWorkOrderStatus.setMailNo(response.getMailNo());
-//							updateWorkOrderStatus
-//									.setPackageCenterCode(response.getDistributeInfo().getPackageCenterCode());
-//							updateWorkOrderStatus
-//									.setConsigneeBranchCode(response.getDistributeInfo().getConsigneeBranchCode());
-//							updateWorkOrderStatus
-//									.setPackageCenterName(response.getDistributeInfo().getPackageCenterName());
-//							updateWorkOrderStatus.setShortAddress(response.getDistributeInfo().getShortAddress());
-//							updateWorkOrderStatus.setUpStatus(-1);
-//							Date now1 = new Date();
-//							SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//							updateWorkOrderStatus.setUpTime(dateFormat.format(now1));
-//							if (workOrderService.updateWorkOrderByID(updateWorkOrderStatus) > 0) {
-//								logger.info(workOrder.getId() + "更新成功过！");
-//							} else {
-//								logger.error(workOrder.getId() + "更新成失败！");
-//							}
-//						}
 					}
 				} catch (JAXBException e) {
 
