@@ -1,7 +1,5 @@
 package com.renyuwo.alamp.entity;
 
-import java.util.Date;
-
 public class WorkOrder {
 	private int id;
 	
