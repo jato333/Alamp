@@ -1,7 +1,5 @@
 package com.renyuwo.alamp.entity;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="RequestOrder")
